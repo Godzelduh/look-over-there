@@ -39,7 +39,7 @@ const SearchPage = () => {
                         <p>{result.formatted_address}</p>
                         {result.photos && result.photos.length > 0 && (
                             <img
-                                src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${result.photos[0].photo_reference}&key=AIzaSyDJ-m_2aO6B3qhai46N4zRpNt3fRT-p-EU`}
+                                src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${result.photos[0].photo_reference}&key=${GOOGLE_MAP_API_KEY}`}
                                 alt={result.name}
                             />
                         )}
