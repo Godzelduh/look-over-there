@@ -51,6 +51,11 @@ interface AddUserArgs {
     };
   }
 
+  //for TextSearch in external API
+  interface TextSearchArgs {
+    query: string;
+  }
+
 const resolvers = {
 
     Query: {
@@ -76,6 +81,32 @@ const resolvers = {
                 return User.findById(context.user._id).populate("progress");
             }
             throw new AuthenticationError("You need to be logged in!");
+        },
+         //fetch places from external API
+         textSearch: async (_: any, { query }: TextSearchArgs) => {
+          const apiKey = process.env.GOOGLE_MAP_API_KEY;
+    
+          try {
+            const response = await fetch(
+              `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(query)}&key=${apiKey}`
+            );
+            const data = await response.json();
+    
+            if (data.status !== 'OK') {
+              throw new Error(`Google Places API Error: ${data.status}`);
+            }
+    
+            return data.results.slice(0, 5).map((result: any) => ({
+              name: result.name,
+              formatted_address: result.formatted_address,
+              photos: result.photos?.map((photo: any) =>
+                  `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo.photo_reference}&key=${apiKey}`
+              )  || [],
+            }));
+          } catch (error) {
+            console.error('Error fetching data from Google Places API:', error);
+            throw new Error('Failed to fetch data');
+          }
         },
     },
 
