@@ -1,29 +1,45 @@
 import express from 'express';
-import * as dotenv from 'dotenv';
-import fetch from 'node-fetch';
+import path from 'node:path';
+import type { Request, Response } from 'express';
+import db from './config/connection.js'
+import { ApolloServer } from '@apollo/server';// Note: Import from @apollo/server-express
+import { expressMiddleware } from '@apollo/server/express4';
+import { typeDefs, resolvers } from './schemas/index.js';
+import { authenticateToken } from './utils/auth.js';
 
-dotenv.config();
+const server = new ApolloServer({
+  typeDefs,
+  resolvers
+});
 
-const app = express();
-const port = process.env.PORT || 4000;
+const startApolloServer = async () => {
+  await server.start();
+  await db();
 
-app.get('/api/textSearch', async (_req, res) => {
-  const query = _req.query.query as string;
-  const apiKey = process.env.GOOGLE_MAP_API_KEY;
+  const PORT = process.env.PORT || 3001;
+  const app = express();
 
-    if (!query) {
-        res.status(400).json({ error: 'Query is required' });
-        return;
+  app.use(express.urlencoded({ extended: false }));
+  app.use(express.json());
+
+  app.use('/graphql', expressMiddleware(server as any,
+    {
+      context: authenticateToken as any
     }
-  try {
-    const response = await fetch(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&key=${apiKey}`);
-    const data = await response.json();
-    res.json(data);
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch data 333' });
-  }
-});
+  ));
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+  if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../client/dist')));
+
+    app.get('*', (_req: Request, res: Response) => {
+      res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+    });
+  }
+
+  app.listen(PORT, () => {
+    console.log(`API server running on port ${PORT}!`);
+    console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
+  });
+};
+
+startApolloServer();
