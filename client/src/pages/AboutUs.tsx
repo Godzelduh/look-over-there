@@ -1,11 +1,13 @@
-const AboutUs = () => {
+import React from 'react';
 
-    return (
-        <>
-          <>AboutUs</>
-        </>
-      );
+const AboutUs: React.FC = () => {
+  return (
+    <>
+      <div style={{ textAlign: 'center', marginTop: '20px', fontSize: '24px', color: '#333' }}>
+        About Us
+      </div>
+    </>
+  );
 };
 
 export default AboutUs;
-
