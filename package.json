@@ -7,6 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently \"npm run start-db\" \"npm run start:client\" ",
     "start-db": "cd server && npm run start",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "build": "concurrently \"cd server && npm run build\" \"cd client && npm run build\"",
     "start:client": "cd client && npm run dev"
   },
   "repository": {
@@ -20,27 +22,28 @@
     "url": "https://github.com/Godzelduh/look-over-there/issues"
   },
   "homepage": "https://github.com/Godzelduh/look-over-there#readme",
-    "dependencies": {
-        "express": "^4.17.1",
-        "react": "^16.13.1",
-        "react-dom": "^16.13.1",
-        "@types/react": "^19.0.1",
-        "@types/react-dom": "^19.0.0",
-        "react-router-dom": "^5.2.0",
-        "typescript": "^5.7.2",
-        "axios": "1.7.4",
-        "graphql": "^15.5.0",
-        "apollo-server": "^2.19.0",
-        "apollo-server-express": "^2.19.0",
-        "mongoose": "^8.0.4",
-        "nodemon": "^2.0.3",
-        "dotenv": "^8.2.0",
-        "cors": "^2.8.5",
-        "bcrypt": "5.1.1",
-        "jsonwebtoken": "9.0.0",
-        "@types/express": "^5.0.0",
-        "@types/mongoose": "5.11.97",
-        "google-map-react": "^2.2.1",
-        "concurrently": "^6.2.1"
-    }
+  "dependencies": {
+    "@react-google-maps/api": "^2.20.3",
+    "@types/express": "^5.0.0",
+    "@types/mongoose": "5.11.97",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.0",
+    "apollo-server": "^2.19.0",
+    "apollo-server-express": "^2.19.0",
+    "axios": "1.7.4",
+    "bcrypt": "5.1.1",
+    "concurrently": "^6.2.1",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "google-map-react": "^2.2.1",
+    "graphql": "^15.5.0",
+    "jsonwebtoken": "9.0.0",
+    "mongoose": "^8.0.4",
+    "nodemon": "^2.0.3",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
+    "typescript": "^5.7.2"
+  }
 }
