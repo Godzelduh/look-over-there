@@ -17,6 +17,7 @@ const Signup = () => {
   // set state for form errors
   const [formErrors, setFormErrors] = useState<{ username?: string; email?: string; password?: string }>({});
   // set state for alert
+  //const [error, setError] = useState('');
   const [showAlert, setShowAlert] = useState(false);
 
   const [createUser] = useMutation(CREATE_USER, {
@@ -33,6 +34,7 @@ const Signup = () => {
 
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    //setError('')
 
     const errors: { username?: string; email?: string; password?: string } = {};
     if (!userFormData.username) errors.username = 'Username is required!';
@@ -63,15 +65,15 @@ const Signup = () => {
     } catch (err) {
       console.error(err);
       setShowAlert(true);
-    } finally {
+    } 
       // Reset form state regardless of success or failure
-      setUserFormData({
-        username: '',
-        email: '',
-        password: '',
-        savedLocations: [],
-      });
-    }
+    setUserFormData({
+      username: '',
+      email: '',
+      password: '',
+      savedLocations: [],
+    });
+    
   };
 
   return (
