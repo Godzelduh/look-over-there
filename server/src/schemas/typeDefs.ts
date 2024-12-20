@@ -46,6 +46,13 @@ status:String!
 completion_time: String
 }
 
+#for the place in external API
+type Place {
+name: String!
+formatted_address: String!
+photos: [String]!
+}
+
 # Input types
 input LocationInput {
 type: String!
@@ -91,6 +98,12 @@ getChallengeProgress(userId: ID!): [ChallengeProgress]!
 me: User
 }
 
+#for TextSearch in external API
+ extend type Query {
+
+ textSearch(query: String!): [Place]!
+ }
+ 
 #Mutations
 type Mutation {
 createUser(input: CreateUserInput): AuthPayload
