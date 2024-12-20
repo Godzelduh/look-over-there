@@ -1,14 +1,22 @@
 // import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-// import SignUpForm from './SignupForm';
-// import LoginForm from './LoginForm';
 
+import Auth from '../utils/auth';
 
 const Navbar = () => {
     const currentPage = useLocation().pathname;
-    
-    // const { user, setUser, isAuthenticated } = useAuth();
+    //const { user, setUser, isAuthenticated } = useAuth();
+    const handleLogout = () => {
+        Auth.logout();
+    };
 
+    if (currentPage === '/login') {
+        return null;
+    }
+
+    if (currentPage === '/signup') {
+        return null;
+    }
     // const handleLogout = () => {
     //   logout();
     //   setUser(null);
@@ -25,38 +33,73 @@ const Navbar = () => {
     // }
     return (
         <>
-        <nav className="nav">
-            <li className="nav-item">
-                <Link
-                    to="/"
+            <nav className="nav">
+                <li className="nav-item">
+                    <Link
+                        to="/"
 
-                    // This is a conditional (ternary) operator that checks to see if the current page is "Home"
-                    // If it is, we set the current page to 'nav-link-active', otherwise we set it to 'nav-link'
-                    className={currentPage === '/' ? 'nav-link active' : 'nav-link'}
-                >
-                    Home
-                </Link>
-            </li>
+                        // This is a conditional (ternary) operator that checks to see if the current page is "Home"
+                        // If it is, we set the current page to 'nav-link-active', otherwise we set it to 'nav-link'
+                        className={currentPage === '/' ? 'nav-link active' : 'nav-link'}
+                    >
+                        Home
+                    </Link>
+                </li>
+                {Auth.loggedIn() ? (
+                    <>
+                        <li className="nav-item">
+                            <Link
 
-            <li className="nav-item">
-                <Link
+                                to="/Profile"
+                                className={currentPage === '/Profile' ? 'nav-link active' : 'nav-link'}
+                            >
+                                Profile
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link
+                                to="/AboutUs"
+                                className={currentPage === '/AboutUs' ? 'nav-link active' : 'nav-link'}
+                            >
+                                AboutUs
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <span className="text-sm font-medium text-gray-600">
+                            </span>
+                            <button
+                                onClick={handleLogout}
+                                className={"log-in"}
+                            >
+                                Logout
+                            </button>
+                        </li>
+                    </>) : (
+                    <div className='nav'>
+                        <li className="nav-item">
+                            <Link
+                                to="/login"
+                                // Check to see if the currentPage is `About`, and if so we use the active link class from bootstrap. Otherwise, we set it to a normal nav-link
+                                className={currentPage === '/login' ? 'nav-link active' : 'nav-link'}
+                            //className={loginButtonStyles}
+                            >
+                                Login
+                            </Link>
+                        </li>
 
-                    to="/Profile"
-                    className={currentPage === '/Profile' ? 'nav-link active' : 'nav-link'}
-                >
-                    Profile
-                </Link>
-            </li>
-            <li className="nav-item">
-                <Link
-                    to="/AboutUs"
-                    className={currentPage === '/AboutUs' ? 'nav-link active' : 'nav-link'}
-                >
-                    AboutUs
-                </Link>
-            </li>
-
-        </nav>
+                        <li className="nav-item">
+                            <Link
+                                to="/signup"
+                                // Check to see if the currentPage is `About`, and if so we use the active link class from bootstrap. Otherwise, we set it to a normal nav-link
+                                className={currentPage === '/signup' ? 'nav-link active' : 'nav-link'}
+                            //className={loginButtonStyles}
+                            >
+                                Sign Up
+                            </Link>
+                        </li>
+                    </div>
+                )}
+            </nav>
         </>
 
     )

@@ -3,9 +3,12 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 //import 'bootstrap/dist/css/bootstrap.min.css'
 
 import App from './App.jsx'
+
 import Profile from './pages/Profile.jsx'
 import AboutUs from './pages/AboutUs.jsx'
 import Home from './pages/Home.jsx'
+import Login from './components/Login.js'
+import Signup from './components/Signup.js'
 
 const router = createBrowserRouter([
   {
@@ -28,6 +31,14 @@ const router = createBrowserRouter([
       {
         path: '/AboutUs',
         element: <AboutUs />
+      },
+      {
+        path: '/login',
+        element: <Login/>,
+      },
+      {
+        path: '/signup',
+        element: <Signup/>,
       },
     ]
   }

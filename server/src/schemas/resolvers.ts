@@ -2,7 +2,7 @@
 import User from "../models/User.js";
 import ChallengeProgress from "../models/ChallengeProgress.js";
 import Challenge from "../models/Challenge.js";
-import {signToken,AuthenticationError} from "../utils/auth.js";
+import {signToken, AuthenticationError} from "../utils/auth.js";
 
 interface AddUserArgs {
     input: {
@@ -81,8 +81,9 @@ const resolvers = {
 
     Mutation: {
         //Create a new user
-        createUser: async (_:any,{input}:AddUserArgs) => {
-            const user = await User.create(input);
+        createUser: async (_:any, {input}:AddUserArgs) => {
+            const user = await User.create({ ...input});
+            console.log(user, "HIT")
             const token = signToken(user.username,user.email,user._id);
             return {token,user};
         },
@@ -97,6 +98,7 @@ const resolvers = {
                 throw new AuthenticationError("Incorrect credentials -password");// need to remove -password later
             }
             const token = signToken(user.username,user.email,user._id);
+            console.log("logged In!")
             return {token,user};
         },
         //Add a saved location to a user's profile
