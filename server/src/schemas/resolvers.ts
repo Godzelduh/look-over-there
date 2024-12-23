@@ -102,6 +102,12 @@ const resolvers = {
               photos: result.photos?.map((photo: any) =>
                   `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo.photo_reference}&key=${apiKey}`
               )  || [],
+                geometry: {
+                    location: {
+                        lat: result.geometry.location.lat,
+                        lng: result.geometry.location.lng
+                    }
+                }
             }));
           } catch (error) {
             console.error('Error fetching data from Google Places API:', error);

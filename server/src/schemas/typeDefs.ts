@@ -46,11 +46,24 @@ status:String!
 completion_time: String
 }
 
+# Geometry type
+type Geometry {
+  location: LocationCoordinates!
+}
+
+# LocationCoordinates type
+type LocationCoordinates {
+  lat: Float!
+  lng: Float!
+}
+
+
 #for the place in external API
 type Place {
 name: String!
 formatted_address: String!
 photos: [String]!
+geometry: Geometry!
 }
 
 # Input types

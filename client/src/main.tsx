@@ -9,6 +9,8 @@ import AboutUs from './pages/AboutUs.jsx'
 import Home from './pages/Home.jsx'
 import Login from './components/Login.js'
 import Signup from './components/Signup.js'
+import TestPage from './pages/test.jsx'
+import GPSLocation   from "./components/GPS.tsx";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +42,14 @@ const router = createBrowserRouter([
         path: '/signup',
         element: <Signup/>,
       },
+      {
+        path: '/test',
+        element: <TestPage />,
+       },
+      {
+        path: '/GPSLocation',
+        element: <GPSLocation />,
+      }
     ]
   }
 ])
