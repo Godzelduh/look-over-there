@@ -62,7 +62,7 @@ const Navbar = () => {
                                 <Link
                                     to="/login"
                                     className={currentPage === '/login' ? 'nav-link active' : 'nav-link'}
-                                >
+                                > 
                                     Login
                                 </Link>
                             </li>

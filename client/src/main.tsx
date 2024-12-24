@@ -12,6 +12,9 @@ import Signup from './components/Signup.js'
 import TestPage from './pages/test.jsx'
 import GPSLocation   from "./components/GPS.tsx";
 
+import './index.css'
+import './login.css'
+
 const router = createBrowserRouter([
   {
     path: '/',

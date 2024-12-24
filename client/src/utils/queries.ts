@@ -68,3 +68,14 @@ export const GET_LOCATION = gql`
     }
   }
 `;
+
+export const GET_PLACES = gql`
+  query TextSearch($query: String!) {
+    textSearch(query: $query) {
+      name
+      formatted_address
+      photos
+      geometry
+    }
+  }
+`;
