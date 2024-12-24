@@ -38,9 +38,9 @@ const Home = () => {
 
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const queryTouristAttr =  textQuery + "Tourist Attraction";
+    const queryTouristAttr = textQuery + "Tourist Attraction";
     await loadPlaces({
-      variables: { query: queryTouristAttr}
+      variables: { query: queryTouristAttr }
     });
   }
 
@@ -78,12 +78,17 @@ const Home = () => {
           <h2>Search Results:</h2>
           <ul>
             {places.map((place: Place, index: number) => (
-              <li key = {index}>
-                <img src = {place.photos} alt = "images of tourist attrations for city"/>
-                </li> // Adjust based on your data structure
+              <li key={index}>
+                <div>
+                  {place.photos.map((photo: string, photoIndex: number) => (
+                    <img key={photoIndex} src={photo} alt={`Image of results for city`} style={{ maxWidth: '100%', height: 'auto' }} />
+                  ))}
+                </div>
+
+              </li> // Adjust based on your data structure
             ))}
           </ul>
-        </div> 
+        </div>
       )}
     </div>
   );
