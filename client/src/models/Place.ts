@@ -1,7 +1,7 @@
 export interface Place {
     name: string,
     formattedAddress: string,
-    photos: [String]
+    photos: [string]
     geometry: {
       location: {
         lat: number,
