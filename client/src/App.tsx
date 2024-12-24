@@ -6,9 +6,16 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { Outlet } from 'react-router-dom';
-
+import { Outlet, Route, Routes } from 'react-router-dom';
+import { isMobileDevice } from './utils/deviceType';
+import Home from "./pages/Home.tsx";
+import MobileHomePage from './pages/MobileHomePage.tsx';
+import About from "./pages/AboutUs.tsx";
+import MobileAboutPage from './pages/MobileAboutUs.tsx';
+import Profile from "./pages/Profile.tsx";
+import MobileProfilePage from './pages/MobileProfilePage.tsx';
 import Navbar from './components/Navbar.jsx';
+import React from "react";
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -33,13 +40,22 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-function App() {
+const App: React.FC = () => {
+  const isMobile = isMobileDevice();
+
   return (
-    <ApolloProvider client={client}>
-      <Navbar />
-      <Outlet />
-    </ApolloProvider>
+      <ApolloProvider client={client}>
+            <Routes>
+                <Route path="/" element={isMobile ? <MobileHomePage /> : <Home />} />
+                <Route path="/AboutUs" element={isMobile ? <MobileAboutPage /> : <About />} />
+                <Route path="/Profile" element={isMobile ? <MobileProfilePage /> : <Profile />} />
+                <Route path="/login" element={<Outlet />} />
+                <Route path="/signup" element={<Outlet />} />
+                {/* Add other routes here */}
+            </Routes>
+            <Navbar />
+      </ApolloProvider>
   );
-}
+};
 
 export default App;
