@@ -41,6 +41,7 @@ interface AddUserArgs {
       photo_instruction?: string;
       physical_task_info?: string;
       verification_method?: string;
+      address?: string;
     };
   }
 

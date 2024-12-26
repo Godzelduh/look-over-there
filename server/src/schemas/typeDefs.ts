@@ -35,6 +35,7 @@ answer: String
 photo_instruction: String
 physical_task_info: String
 verification_method: String
+address: String
 }
 
 # ChallengeProgress type
@@ -89,6 +90,7 @@ answer: String
 photo_instruction: String
 physical_task_info: String
 verification_method: String
+address: String
 }
 
 input UpdateProgressInput {
