@@ -13,6 +13,7 @@ interface IChallenge extends Document {
       photo_instruction?: string;
       physical_task_info?: string;
       verification_method?: string;
+      address?: string;
 }
 
 const ChallengeSchema = new Schema<IChallenge>({
@@ -56,6 +57,10 @@ const ChallengeSchema = new Schema<IChallenge>({
         required: false
     },
     verification_method: {
+        type: String,
+        required: false
+    },
+    address: {
         type: String,
         required: false
     }
