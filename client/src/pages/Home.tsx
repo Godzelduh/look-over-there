@@ -4,7 +4,9 @@ import type { ChangeEvent, FormEvent } from 'react';
 import { GET_PLACES } from '../utils/queries';
 import { useLazyQuery } from '@apollo/client';
 import { useState } from 'react';
-import { Place } from '../models/Place';
+
+import ChallengeCard from '../components/ChallangeCard';
+
 //import { text } from 'express';
 
 const styles: { container: CSSProperties; image: CSSProperties } = {
@@ -74,21 +76,7 @@ const Home = () => {
       </form>
 
       {called && !loading && places.length > 0 && (
-        <div>
-          <h2>Search Results:</h2>
-          <ul>
-            {places.map((place: Place, index: number) => (
-              <li key={index}>
-                <div>
-                  {place.photos.map((photo: string, photoIndex: number) => (
-                    <img key={photoIndex} src={photo} alt={`Image of results for city`} style={{ maxWidth: '100%', height: 'auto' }} />
-                  ))}
-                </div>
-
-              </li> // Adjust based on your data structure
-            ))}
-          </ul>
-        </div>
+        <ChallengeCard places = {places}/>
       )}
     </div>
   );
