@@ -55,10 +55,10 @@ const Home = () => {
       <img src={ScavengerHunting} alt="Found Locations" style={styles.image} />
       <form onSubmit={handleFormSubmit}>
         <div className='search-bar'>
-          <label htmlFor='searchbar'>Create your own Scavenger Hunt!</label>
+          <label htmlFor='searchbar' className='search-label'>Your Scavenger Hunt starts here!</label>
           <input
             type='text'
-            placeholder='Enter your City'
+            placeholder='          Enter your city'
             name='city'
             onChange={handleInputChange}
             className="log-in"
@@ -71,7 +71,7 @@ const Home = () => {
           type='submit'
           className="log-in"
         >
-          Search
+          Begin Scavenger Hunt
         </button>
       </form>
 

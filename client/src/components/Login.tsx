@@ -49,9 +49,10 @@ const Login = () => {
   };
 
   return (
+    
     <>
     <img src={LookoverthereLogo1} alt="LookHere!!!" className="nav-logo" />
-    <h2>Login to your Account!</h2>
+    <h2>Log in to your account!</h2>
       <form onSubmit={handleFormSubmit}>
 
          <div className='form'>
