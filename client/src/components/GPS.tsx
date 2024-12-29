@@ -26,8 +26,8 @@ const GPSLocation: React.FC = () => {
     useEffect(() => {
         const onSuccess = (position: GeolocationPosition) => {
             setUserLocation({
-                 latitude: position.coords.latitude,
-                 longitude: position.coords.longitude,
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude,
                 //latitude: 29.418614370372968, //Use for dummy data
                 //longitude: -98.48359925277157,
             });
