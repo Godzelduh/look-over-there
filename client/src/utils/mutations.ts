@@ -13,6 +13,21 @@ export const CREATE_USER = gql`
   }
 `;
 
+
+
+export const LOGIN_USER = gql`
+  mutation login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
+      user {
+        id
+        username
+        email
+      }
+    }
+  }
+`;
+
 export const SAVE_LOCATION = gql`
  mutation addSavedLocation($input: LocationInput!) {
     addSavedLocation(input: $input) {
@@ -31,15 +46,17 @@ export const SAVE_LOCATION = gql`
   }
 `;
 
-export const LOGIN_USER = gql`
-  mutation login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      token
-      user {
-        id
-        username
-        email
-      }
+export const CREATE_CHALLENGE = gql`
+  mutation createChallenge($input: ChallengeInput!) {
+    createChallenge(input: $input) {
+      id 
+      type
+      location
+      task
+      image_url
+      
     }
-  }
-`;
+  } 
+
+
+`
