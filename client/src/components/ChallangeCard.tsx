@@ -14,18 +14,20 @@ const ChallengeCard = ({ places }: { places: Place[] }) => {
                     {places.map((place: Place, index: number) => (
                         <li id={`challangeCard__slide${index+1}`} tabIndex={0} className="carousel__slide" key={index}>
                             <div className="carousel__snapper">
-                                <h3>{counter[index]} Challenge!</h3>
+                                <div className='image-container'>
+                                    <h3 className="overlap">{counter[index]} Challenge!</h3>
                                     {place.photos.map((photo: string, photoIndex: number) => (
                                         <img 
                                             key={photoIndex}
                                             src={photo}
                                             alt={`Image of ${place.name}`}
-                                            style={{ height: '100%', width: 'auto' }}
-
+                                            className='image-style'
                                         />
                                     ))}
-                                    <a href={`#challangeCard__slide${index === 0 ? places.length : index}`} className="carousel__prev">Go to previous slide</a>
-                                    <a href={`#challangeCard__slide${index === places.length - 1 ? 1 : index + 2}`} className="carousel__next">Go to next slide</a>
+                                </div>
+                                
+                                <a href={`#challangeCard__slide${index === 0 ? places.length : index}`} className="carousel__prev">Go to previous slide</a>
+                                <a href={`#challangeCard__slide${index === places.length - 1 ? 1 : index + 2}`} className="carousel__next">Go to next slide</a>
                              </div>
                          </li> 
                     ))}
