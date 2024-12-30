@@ -42,7 +42,6 @@ const ChallengeCard = ({ places }: { places: Place[] }) => {
                     </ol>
                 </aside>
                 </div>
-                <button>Start Challange!</button>
             </div>
         </>
     )

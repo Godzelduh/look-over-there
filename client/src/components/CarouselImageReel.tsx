@@ -14,11 +14,11 @@ const ImageReel = () => {
     return (
         <>
             <div >
-                <div className='carousel' aria-label="Gallery">
-                <ol className="carousel__viewport">
+                <div className='image-reel' aria-label="Gallery">
+                <ol className="image-reel__viewport">
                     {images.map((image: string, index: number) => (
-                        <li id={`imageReel__slide${index+1}`} tabIndex={0} className="carousel__slide" key={index}>
-                            <div className="carousel__snapper">
+                        <li id={`imageReel__slide${index+1}`} tabIndex={0} className="image-reel__slide" key={index}>
+                            <div className="image-reel__snapper">
                                 
                                     
                                         <img 
@@ -28,17 +28,17 @@ const ImageReel = () => {
                                         
                                         />
                                    
-                                    <a href={`#imageReel__slide${index === 0 ? images.length : index}`} className="carousel__prev">Go to previous slide</a>
-                                    <a href={`#imageReel__slide${index === images.length - 1 ? 1 : index + 2}`} className="carousel__next">Go to next slide</a>
+                                    <a href={`#imageReel__slide${index === 0 ? images.length : index}`} className="image-reel__prev">Go to previous slide</a>
+                                    <a href={`#imageReel__slide${index === images.length - 1 ? 1 : index + 2}`} className="image-reel__next">Go to next slide</a>
                              </div>
                          </li> 
                     ))}
                 </ol>
-                <aside className="carousel__navigation">
-                    <ol className="carousel__navigation-list">
+                <aside className="image-reel__navigation">
+                    <ol className="image-reel__navigation-list">
                         {images.map((_, navIndex) => (
-                            <li className="carousel__navigation-item" key={navIndex}>
-                                <a href={`#imageReel__slide${navIndex + 1}`} className="carousel__navigation-button">Go to slide {navIndex + 1}</a>
+                            <li className="image-reel__navigation-item" key={navIndex}>
+                                <a href={`#imageReel__slide${navIndex + 1}`} className="image-reel__navigation-button">Go to slide {navIndex + 1}</a>
                             </li>
                         ))}
                     </ol>
