@@ -4,7 +4,7 @@ import type { ChangeEvent, FormEvent } from 'react';
 import { GET_PLACES } from '../utils/queries';
 import { useLazyQuery } from '@apollo/client';
 import { useState } from 'react';
-
+import CarouselImageReel from '../components/CarouselImageReel';
 import ChallengeCard from '../components/ChallangeCard';
 
 //import { text } from 'express';
@@ -53,6 +53,7 @@ const Home = () => {
     <div style={styles.container}>
       {/* Other content can go here*/}
       <img src={ScavengerHunting} alt="Found Locations" style={styles.image} />
+      <CarouselImageReel/>
       <form onSubmit={handleFormSubmit}>
         <div className='search-bar'>
           <label htmlFor='searchbar' className='search-label'>Your Scavenger Hunt starts here!</label>
