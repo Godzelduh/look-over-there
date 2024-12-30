@@ -54,7 +54,7 @@ li {
 }
 .carousel, .image-reel {
     position: relative;
-    padding-top: 75%;
+    height: 525px;
     filter: drop-shadow(0 0 10px #0003);
     perspective: 100px;
     background-color: #0a3c44;
