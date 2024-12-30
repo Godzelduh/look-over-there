@@ -6,6 +6,7 @@ import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 import type { User } from '../models/User';
 import LookoverthereLogo1 from '../assets/LookoverthereLogo1.jpg';
+import '../Styles/login.css' 
 
 const Login = () => {
   const [userFormData, setUserFormData] = useState<User>({ username: '', email: '', password: '', savedLocations: [] });

@@ -12,10 +12,8 @@ const images: string[] = [
 
 const ImageReel = () => {
     return (
-
         <>
             <div >
-                <h2>Preview of your Hunt!</h2> 
                 <div className='carousel' aria-label="Gallery">
                 <ol className="carousel__viewport">
                     {images.map((image: string, index: number) => (

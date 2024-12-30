@@ -13,7 +13,7 @@ import TestPage from './pages/test.jsx'
 import GPSLocation   from "./components/GPS.tsx";
 
 import './Styles/index.css'
-import './Styles/login.css'
+
 
 const router = createBrowserRouter([
   {

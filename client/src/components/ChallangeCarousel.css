@@ -1,36 +1,9 @@
-  @keyframes snap {
-    96% {
-      scroll-snap-align: center;
-    }
-    97% {
-      scroll-snap-align: none;
-    }
-    99% {
-      scroll-snap-align: none;
-    }
-    100% {
-      scroll-snap-align: center;
-    }
-  }
-  
   * {
     box-sizing: border-box;
     scrollbar-color: transparent transparent; /* thumb and track color */
     scrollbar-width: 0px;
   }
   
-  *::-webkit-scrollbar {
-    width: 0;
-  }
-  
-  *::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  
-  *::-webkit-scrollbar-thumb {
-    background: transparent;
-    border: none;
-  }
   
   * {
     -ms-overflow-style: none;
@@ -41,10 +14,24 @@
     margin: 0;
     padding: 0;
   }
+
+  .image-container {
+    position: relative;
+  }
+
+  .overlap {
+    position: absolute; /* Position the header absolutely */
+    top: 20px; /* Adjust as needed */
+    left: 20px; /* Adjust as needed */
+    color: white; /* Change text color for visibility */
+    background-color: rgba(0, 0, 0, 0.5); /* Optional: add a background for better readability */
+    padding: 5px; /* Optional: add some padding */
+    border-radius: 5px;
+  }
   
   .carousel {
     position: relative;
-    padding-top: 75%;
+    padding-top: 0px;
     filter: drop-shadow(0 0 10px #0003);
     perspective: 100px;
     background-color: #0a3c44;
@@ -57,10 +44,8 @@
     bottom: 0;
     left: 0;
     display: flex;
-    overflow-x: scroll;
+    overflow-x: hidden;
     counter-reset: item;
-    scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
   }
   
   .carousel__slide {
