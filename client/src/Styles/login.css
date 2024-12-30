@@ -3,7 +3,7 @@
 color: rgba(255, 253, 253, 0.87);
 font-size: 1rem;
 font-weight: 400;
-width: 200px;
+width: 50%;
 height: 35px;
 padding-top: 10px;
 margin-bottom: 20px;
@@ -12,6 +12,11 @@ border-bottom: white 1px solid;
 border-top: none;
 border-left: none;
 border-right: none;
+}
+
+.log-in::placeholder {
+  color: black; /* Change 'red' to any color you prefer */
+  opacity: 0.5; /* Optional: Adjusts the opacity of the placeholder */
 }
 
 .form {

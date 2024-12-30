@@ -52,14 +52,13 @@ const Home = () => {
   return (
     <div style={styles.container}>
       {/* Other content can go here*/}
-      <img src={ScavengerHunting} alt="Found Locations" style={styles.image} />
       <CarouselImageReel/>
       <form onSubmit={handleFormSubmit}>
         <div className='search-bar'>
-          <label htmlFor='searchbar' className='search-label'>Your Scavenger Hunt starts here!</label>
+          <label htmlFor='searchbar' className='search-label'>Your Scavenger Hunt starts here!  </label>
           <input
             type='text'
-            placeholder='          Enter your city'
+            placeholder=' Enter your city'
             name='city'
             onChange={handleInputChange}
             className="log-in"
@@ -72,7 +71,7 @@ const Home = () => {
           type='submit'
           className="log-in"
         >
-          Begin Scavenger Hunt
+          Search for your Scavenger Hunt
         </button>
       </form>
 
