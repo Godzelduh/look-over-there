@@ -48,11 +48,11 @@ li {
 }
 
 .image-style {
-    height: 100%;
+    height: 525px;
     width: 100%;
     border-radius: 50px;
 }
-.carousel {
+.carousel, .image-reel {
     position: relative;
     padding-top: 75%;
     filter: drop-shadow(0 0 10px #0003);
@@ -62,7 +62,7 @@ li {
     width:700px;
 }
 
-.carousel__viewport {
+.carousel__viewport, .image-reel__viewport {
     position: absolute;
     top: 0;
     right: 0;
@@ -73,14 +73,14 @@ li {
 
 }
 
-.carousel__slide {
+.carousel__slide, .image-reel__slide {
     position: relative;
     flex: 0 0 100%;
     width: 100%;
   
 }
 
-.carousel__slide:before {
+.carousel__slide:before, .image-reel__slide:before {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -89,7 +89,7 @@ li {
     font-size: 2em;
 }
 
-.carousel__snapper {
+.carousel__snapper, .image-reel__snapper {
     position: absolute;
     top: 0;
     left: 0;
@@ -98,7 +98,7 @@ li {
     scroll-snap-align: center;
 }
 
-.carousel__navigation {
+.carousel__navigation, .image-reel__navigation {
     position: absolute;
     right: 0;
     bottom: 0;
@@ -107,11 +107,13 @@ li {
 }
 
 .carousel__navigation-list,
-.carousel__navigation-item {
+.carousel__navigation-item,
+.image-reel__navigation-list,
+.image-reel__navigation-item {
     display: inline-block;
 }
 
-.carousel__navigation-button {
+.carousel__navigation-button, .image-reel__navigation-button {
     display: inline-block;
     width: 1.5rem;
     height: 1.5rem;
@@ -126,7 +128,11 @@ li {
 .carousel::before,
 .carousel::after,
 .carousel__prev,
-.carousel__next {
+.carousel__next,
+.image-reel::before,
+.image-reel::after,
+.image-reel__prev,
+.image-reel__next {
     position: absolute;
     top: 0;
     margin-top: 37.5%;
@@ -139,17 +145,23 @@ li {
 }
 
 .carousel::before,
-.carousel__prev {
+.carousel__prev,
+.image-reel::before,
+.image-reel__prev {
     left: -1rem;
 }
 
 .carousel::after,
-.carousel__next {
+.carousel__next,
+.image-reel::after,
+.image-reel__next {
     right: -1rem;
 }
 
 .carousel::before,
-.carousel::after {
+.carousel::after,
+.image-reel::before,
+.image-reel::after {
     content: '';
     z-index: 1;
     background-color: #333;
@@ -163,22 +175,10 @@ li {
     pointer-events: none;
 }
 
-.carousel::before {
+.carousel::before, .image-reel::before {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='0,50 80,100 80,0' fill='%23fff'/%3E%3C/svg%3E");
 }
 
-.carousel::after {
+.carousel::after, .image-reel::after {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='100,50 20,100 20,0' fill='%23fff'/%3E%3C/svg%3E");
-}
-
-button {
-    border-radius: 8px;
-    border: 1px solid transparent;
-    padding: 0.6em 1.2em;
-    font-size: 1em;
-    font-weight: 500;
-    font-family: inherit;
-    background-color: #1a1a1a;
-    cursor: pointer;
-    transition: border-color 0.25s;
 }
