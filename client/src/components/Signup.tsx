@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { CREATE_USER } from '../utils/mutations';
 import { GET_ME } from '../utils/queries';
+import '../Styles/login.css' 
 
 // //import { createUser } from '../utils/API';
  import Auth from '../utils/auth';
@@ -69,8 +70,8 @@ const Signup = () => {
     <>
     <img src={LookoverthereLogo1} alt="LookHere!!!" className="nav-logo" />
      {/* This is needed for the validation functionality above */}
+     <h2>Sign up for your account!</h2>
      <form onSubmit={handleFormSubmit}>
-
 
       <div className='form'>
         <label htmlFor='username'>Username</label>

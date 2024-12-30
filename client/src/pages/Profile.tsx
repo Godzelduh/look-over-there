@@ -1,5 +1,4 @@
 import React, { CSSProperties } from 'react';
-import FoundLocations from '../assets/FoundLocations.jpg'; // Import the image
 
 const Profile: React.FC = () => {
   const styles: { container: CSSProperties, image: CSSProperties } = {
@@ -21,7 +20,7 @@ const Profile: React.FC = () => {
   return (
     <div style={styles.container}>
       {/* Other content can go here */}
-      <img src={FoundLocations} alt="Found Locations" style={styles.image} />
+      <h1>Place Holder</h1>
     </div>
   );
 };
