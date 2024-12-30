@@ -1,10 +1,16 @@
-//import { CSSProperties } from 'react';
 import '../Styles/ChallangeCarousel.css'
-import { Place } from '../models/Place';
+import '../Styles/ImageCarousel.css'
+import ScavengerHunting from '../assets/ScavengerHunting.avif';
+import TestImage from '../assets/testimage.jpg';
+import LookoverthereLogo1 from '../assets/LookoverthereLogo1.jpg';
+const images: string[] = [
+    ScavengerHunting,
+    TestImage,
+    LookoverthereLogo1,
+];
+//list components containing images
 
-const counter = ["First", "Second", "Third", "Fourth", "Fifth"];
-
-const ChallengeCard = ({ places }: { places: Place[] }) => {
+const ImageReel = () => {
     return (
 
         <>
@@ -12,27 +18,27 @@ const ChallengeCard = ({ places }: { places: Place[] }) => {
                 <h2>Preview of your Hunt!</h2> 
                 <div className='carousel' aria-label="Gallery">
                 <ol className="carousel__viewport">
-                    {places.map((place: Place, index: number) => (
+                    {images.map((image: string, index: number) => (
                         <li id={`carousel__slide${index+1}`} tabIndex={0} className="carousel__slide" key={index}>
                             <div className="carousel__snapper">
-                                <h3>{counter[index]} Challenge!</h3>
-                                    {place.photos.map((photo: string, photoIndex: number) => (
+                                
+                                    
                                         <img 
-                                            key={photoIndex}
-                                            src={photo}
-                                            alt={`Image of ${place.name}`}
+                                            key={index}
+                                            src={image}
+                                            alt={`Image of different places`}
                                         
                                         />
-                                    ))}
-                                    <a href={`#carousel__slide${index === 0 ? places.length : index}`} className="carousel__prev">Go to previous slide</a>
-                                    <a href={`#carousel__slide${index === places.length - 1 ? 1 : index + 2}`} className="carousel__next">Go to next slide</a>
+                                   
+                                    <a href={`#carousel__slide${index === 0 ? images.length : index}`} className="carousel__prev">Go to previous slide</a>
+                                    <a href={`#carousel__slide${index === images.length - 1 ? 1 : index + 2}`} className="carousel__next">Go to next slide</a>
                              </div>
                          </li> 
                     ))}
                 </ol>
                 <aside className="carousel__navigation">
                     <ol className="carousel__navigation-list">
-                        {places.map((_, navIndex) => (
+                        {images.map((_, navIndex) => (
                             <li className="carousel__navigation-item" key={navIndex}>
                                 <a href={`#carousel__slide${navIndex + 1}`} className="carousel__navigation-button">Go to slide {navIndex + 1}</a>
                             </li>
@@ -45,4 +51,4 @@ const ChallengeCard = ({ places }: { places: Place[] }) => {
     )
 }
 
-export default ChallengeCard;
+export default ImageReel;
