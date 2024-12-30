@@ -19,7 +19,7 @@ const ImageReel = () => {
                 <div className='carousel' aria-label="Gallery">
                 <ol className="carousel__viewport">
                     {images.map((image: string, index: number) => (
-                        <li id={`carousel__slide${index+1}`} tabIndex={0} className="carousel__slide" key={index}>
+                        <li id={`imageReel__slide${index+1}`} tabIndex={0} className="carousel__slide" key={index}>
                             <div className="carousel__snapper">
                                 
                                     
@@ -30,8 +30,8 @@ const ImageReel = () => {
                                         
                                         />
                                    
-                                    <a href={`#carousel__slide${index === 0 ? images.length : index}`} className="carousel__prev">Go to previous slide</a>
-                                    <a href={`#carousel__slide${index === images.length - 1 ? 1 : index + 2}`} className="carousel__next">Go to next slide</a>
+                                    <a href={`#imageReel__slide${index === 0 ? images.length : index}`} className="carousel__prev">Go to previous slide</a>
+                                    <a href={`#imageReel__slide${index === images.length - 1 ? 1 : index + 2}`} className="carousel__next">Go to next slide</a>
                              </div>
                          </li> 
                     ))}
@@ -40,7 +40,7 @@ const ImageReel = () => {
                     <ol className="carousel__navigation-list">
                         {images.map((_, navIndex) => (
                             <li className="carousel__navigation-item" key={navIndex}>
-                                <a href={`#carousel__slide${navIndex + 1}`} className="carousel__navigation-button">Go to slide {navIndex + 1}</a>
+                                <a href={`#imageReel__slide${navIndex + 1}`} className="carousel__navigation-button">Go to slide {navIndex + 1}</a>
                             </li>
                         ))}
                     </ol>

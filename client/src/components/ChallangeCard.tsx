@@ -6,14 +6,13 @@ const counter = ["First", "Second", "Third", "Fourth", "Fifth"];
 
 const ChallengeCard = ({ places }: { places: Place[] }) => {
     return (
-
         <>
             <div >
                 <h2>Preview of your Hunt!</h2> 
                 <div className='carousel' aria-label="Gallery">
                 <ol className="carousel__viewport">
                     {places.map((place: Place, index: number) => (
-                        <li id={`carousel__slide${index+1}`} tabIndex={0} className="carousel__slide" key={index}>
+                        <li id={`challangeCard__slide${index+1}`} tabIndex={0} className="carousel__slide" key={index}>
                             <div className="carousel__snapper">
                                 <h3>{counter[index]} Challenge!</h3>
                                     {place.photos.map((photo: string, photoIndex: number) => (
@@ -21,11 +20,12 @@ const ChallengeCard = ({ places }: { places: Place[] }) => {
                                             key={photoIndex}
                                             src={photo}
                                             alt={`Image of ${place.name}`}
-                                        
+                                            style={{ height: '100%', width: 'auto' }}
+
                                         />
                                     ))}
-                                    <a href={`#carousel__slide${index === 0 ? places.length : index}`} className="carousel__prev">Go to previous slide</a>
-                                    <a href={`#carousel__slide${index === places.length - 1 ? 1 : index + 2}`} className="carousel__next">Go to next slide</a>
+                                    <a href={`#challangeCard__slide${index === 0 ? places.length : index}`} className="carousel__prev">Go to previous slide</a>
+                                    <a href={`#challangeCard__slide${index === places.length - 1 ? 1 : index + 2}`} className="carousel__next">Go to next slide</a>
                              </div>
                          </li> 
                     ))}
