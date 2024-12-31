@@ -42,6 +42,7 @@ interface AddUserArgs {
       physical_task_info?: string;
       verification_method?: string;
       address?: string;
+      name: string;
     };
   }
 
