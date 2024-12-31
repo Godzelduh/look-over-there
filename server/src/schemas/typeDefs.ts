@@ -13,7 +13,7 @@ preferences: Preferences
 }
 
 type Location {
-type: String!
+type: String
 coordinates: [Float]!
 name: String
 }
@@ -36,6 +36,7 @@ photo_instruction: String
 physical_task_info: String
 verification_method: String
 address: String
+name: String
 }
 
 # ChallengeProgress type
@@ -91,6 +92,7 @@ photo_instruction: String
 physical_task_info: String
 verification_method: String
 address: String
+name: String
 }
 
 input UpdateProgressInput {

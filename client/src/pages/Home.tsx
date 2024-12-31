@@ -45,7 +45,8 @@ const Home = () => {
 
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const queryTouristAttr = textQuery + "Tourist Attraction";
+    const typeInput = "Tourist Attraction"
+    const queryTouristAttr = textQuery + typeInput;
     await loadPlaces({
       variables: { query: queryTouristAttr }
     });

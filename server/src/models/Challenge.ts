@@ -14,6 +14,7 @@ interface IChallenge extends Document {
       physical_task_info?: string;
       verification_method?: string;
       address?: string;
+      name: string;
 }
 
 const ChallengeSchema = new Schema<IChallenge>({
@@ -25,7 +26,7 @@ const ChallengeSchema = new Schema<IChallenge>({
         type: {
             type: String,
             enum: ["Point"],
-            required: true
+            required: false
         },
         coordinates: {
             type: [Number],
@@ -34,7 +35,7 @@ const ChallengeSchema = new Schema<IChallenge>({
     },
     task: {
         type: String,
-        required: true
+        required: false
     },
     image_url: {
         type: String,
@@ -63,7 +64,12 @@ const ChallengeSchema = new Schema<IChallenge>({
     address: {
         type: String,
         required: false
+    },
+    name: {
+        type: String,
+        required: true
     }
+
 },
 {
     timestamps: true,
