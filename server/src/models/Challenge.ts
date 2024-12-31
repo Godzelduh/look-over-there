@@ -6,7 +6,7 @@ interface IChallenge extends Document {
         type: string;
         coordinates: [number, number];
       };
-      task: string;
+      task?: string;
       image_url: string;
       question?: string;
       answer?: string;
