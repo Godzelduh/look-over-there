@@ -84,3 +84,19 @@ export const GET_PLACES = gql`
     }
   }
 `;
+
+export const GET_NEARBY_PLACES = gql`
+  query nearbySearch($location: nearbyLocationInput!, $radius: Int!, $type: String!, $excludedTypes: [String]!) {
+    nearbySearch(location: $location, radius: $radius, type: $type, excludedTypes: $excludedTypes) {
+      name
+      vicinity
+      photos
+      geometry {
+        location {
+          lat
+          lng
+        }
+      }
+    }
+  }
+`;

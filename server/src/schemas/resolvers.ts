@@ -57,6 +57,16 @@ interface AddUserArgs {
     query: string;
   }
 
+  //for NearbySearch in external API
+interface NearbySearchArgs {
+    location: {
+        latitude: number;
+        longitude: number;
+        }
+    radius: number;
+    type: string;
+    excludedTypes?: string[];
+    }
 const resolvers = {
 
     Query: {
@@ -85,9 +95,9 @@ const resolvers = {
         },
          //fetch places from external API
          textSearch: async (_: any, { query }: TextSearchArgs) => {
-          const apiKey = process.env.GOOGLE_MAP_API_KEY;
-    
-          try {
+            const apiKey = process.env.GOOGLE_MAP_API_KEY;
+
+            try {
             const response = await fetch(
               `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(query)}&key=${apiKey}`
             );
@@ -115,7 +125,42 @@ const resolvers = {
             throw new Error('Failed to fetch data');
           }
         },
+        nearbySearch: async (_: any, { location, radius, type, excludedTypes }: NearbySearchArgs) => {
+            const { latitude, longitude } = location;
+            const apiKey = process.env.GOOGLE_MAP_API_KEY;
+
+            try {
+                 const response = await fetch(
+                     `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=${radius}&type=${type}&excludedTypes=${excludedTypes}&key=${apiKey}`
+                 );
+                 const data = await response.json();
+                console.log(latitude,latitude,radius,type, excludedTypes)
+                 if (data.status !== 'OK') {
+                     throw new Error(`Google Places API Error: ${data.status}`);
+                 }
+
+                 return data.results.slice(0, 5).map((result: any) => ({
+                     name: result.name,
+                     vicinity: result.vicinity,
+                     photos: result.photos?.map((photo: any) =>
+                         `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo.photo_reference}&key=${apiKey}`
+                     )  || [],
+                     geometry: {
+                         location: {
+                             lat: result.geometry.location.lat,
+                             lng: result.geometry.location.lng
+                         }
+                     }
+                 }));
+             } catch (error) {
+                 console.error('Error fetching data from Google Places API:', error);
+
+                 throw new Error('Failed to fetch data111');
+             }
+         },
     },
+
+
 
     Mutation: {
         //Create a new user

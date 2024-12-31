@@ -67,11 +67,21 @@ photos: [String]!
 geometry: Geometry!
 }
 
+#extend type place to include nearby address
+extend type Place {
+vicinity: String!
+}
+
 # Input types
 input LocationInput {
 type: String!
 coordinates: [Float]!
 name: String
+}
+
+input nearbyLocationInput { 
+latitude: Float!
+longitude: Float!
 }
 
 input CreateUserInput {
@@ -118,6 +128,11 @@ me: User
 
  textSearch(query: String!): [Place]!
  }
+ 
+#for NearbySearch in external API
+extend type Query {
+nearbySearch(location: nearbyLocationInput!, radius: Int!, type: String!, excludedTypes:[String]!): [Place]!
+}
  
 #Mutations
 type Mutation {
