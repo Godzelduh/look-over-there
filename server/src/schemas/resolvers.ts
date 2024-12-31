@@ -20,7 +20,7 @@ interface AddUserArgs {
   interface AddSavedLocationArgs {
     userId: string;
     location: {
-      type: string;
+      type?: string;
       coordinates: [number, number];
       name?: string;
     };
@@ -30,11 +30,11 @@ interface AddUserArgs {
     input: {
       type: string;
       location: {
-        type: string;
+        type?: string;
         coordinates: [number, number];
         name?: string;
       };
-      task: string;
+      task?: string;
       image_url: string; // Required
       question?: string;
       answer?: string;

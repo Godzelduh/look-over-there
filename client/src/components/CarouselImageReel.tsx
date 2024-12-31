@@ -1,4 +1,4 @@
-import '../Styles/ChallangeCarousel.css'
+import '../Styles/ChallengeCarousel.css'
 import '../Styles/ImageCarousel.css'
 import ScavengerHunting from '../assets/ScavengerHunting.avif';
 import TestImage from '../assets/testimage.jpg';

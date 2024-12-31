@@ -24,11 +24,13 @@ export const GET_USER = gql`
 `;
 
 export const GET_CHALLENGES = gql`
-  query GetChallenges {
+  query getChallenges {
     getChallenges {
       id
-      title
-      description
+      type
+      location
+      image_url
+      name
     }
   }
 `;
@@ -45,7 +47,7 @@ export const GET_CHALLENGE_PROGRESS = gql`
 `;
 
 export const GET_ME = gql`
-  query Me {
+  query me {
     me {
       id
       username

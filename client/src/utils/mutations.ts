@@ -51,12 +51,11 @@ export const CREATE_CHALLENGE = gql`
     createChallenge(input: $input) {
       id 
       type
-      location
-      task
+      location {
+        coordinates
+      }
       image_url
-      
+      name
     }
   } 
-
-
 `

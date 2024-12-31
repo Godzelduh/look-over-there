@@ -28,7 +28,7 @@ type Challenge {
 id: ID!
 type: String!
 location: Location!
-task: String!
+task: String
 image_url: String!
 question: String
 answer: String
@@ -36,7 +36,7 @@ photo_instruction: String
 physical_task_info: String
 verification_method: String
 address: String
-name: String
+name: String!
 }
 
 # ChallengeProgress type
@@ -59,7 +59,6 @@ type LocationCoordinates {
   lng: Float!
 }
 
-
 #for the place in external API
 type Place {
 name: String!
@@ -70,7 +69,7 @@ geometry: Geometry!
 
 # Input types
 input LocationInput {
-type: String!
+type: String
 coordinates: [Float]!
 name: String
 }
@@ -84,7 +83,7 @@ password: String!
 input ChallengeInput {
 type: String!
 location: LocationInput!
-task: String!
+task: String
 image_url: String!
 question: String
 answer: String
@@ -92,7 +91,7 @@ photo_instruction: String
 physical_task_info: String
 verification_method: String
 address: String
-name: String
+name: String!
 }
 
 input UpdateProgressInput {
@@ -117,7 +116,6 @@ me: User
 
 #for TextSearch in external API
  extend type Query {
-
  textSearch(query: String!): [Place]!
  }
  
@@ -132,7 +130,7 @@ login(email: String!, password: String!): AuthPayload
 addSavedLocation(userId: ID!, location: LocationInput!): User
 
 #createChallenge(input: ChallengeInput): Challenge
-createChallenge(input: ChallengeInput!): Challenge
+createChallenge(input: ChallengeInput): Challenge
 
 #updateChallengeStatus -> to be implemented
 updateChallengeStatus(input: UpdateProgressInput!): ChallengeProgress
