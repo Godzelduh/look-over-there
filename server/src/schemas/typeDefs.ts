@@ -28,7 +28,7 @@ type Challenge {
 id: ID!
 type: String!
 location: Location!
-task: String!
+task: String
 image_url: String!
 question: String
 answer: String
@@ -94,7 +94,7 @@ password: String!
 input ChallengeInput {
 type: String!
 location: LocationInput!
-task: String!
+task: String
 image_url: String!
 question: String
 answer: String

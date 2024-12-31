@@ -34,7 +34,7 @@ interface AddUserArgs {
         coordinates: [number, number];
         name?: string;
       };
-      task: string;
+      task?: string;
       image_url: string; // Required
       question?: string;
       answer?: string;
