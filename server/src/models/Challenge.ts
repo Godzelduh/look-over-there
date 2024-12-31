@@ -78,6 +78,8 @@ const ChallengeSchema = new Schema<IChallenge>({
 }
 );
 
+//added index for geolocation
+ChallengeSchema.index({ location: '2dsphere' });
 const Challenge = model<IChallenge>("Challenge", ChallengeSchema);
 
 export default Challenge;
