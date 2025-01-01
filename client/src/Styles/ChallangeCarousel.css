@@ -62,31 +62,45 @@ li {
     width:700px;
 }
 
-.carousel__viewport, .image-reel__viewport {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    overflow: hidden;
+.carousel-container {
+  width: 700px;
+  height: 400px; /* Set a height for the carousel container */
+  position: relative;
+  overflow: hidden;
+}
 
+.carousel__viewport, .image-reel__viewport {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  overflow: hidden;
 }
 
 .carousel__slide, .image-reel__slide {
-    position: relative;
-    flex: 0 0 100%;
-    width: 100%;
-  
+  position: relative;
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%; /* Ensure slides take up the full height of the container */
+}
+
+.carousel__slide img, .image-reel__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure images cover the entire slide area */
 }
 
 .carousel__slide:before, .image-reel__slide:before {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate3d(-50%, -40%, 70px);
-    color: #fff;
-    font-size: 2em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  content: '';
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Optional: Add an overlay effect */
 }
 
 .carousel__snapper, .image-reel__snapper {
@@ -104,6 +118,11 @@ li {
     bottom: 0;
     left: 0;
     text-align: center;
+}
+
+/* Hide navigation arrows */
+.carousel__navigation, .carousel__navigation-button {
+  display: none;
 }
 
 .carousel__navigation-list,
@@ -181,4 +200,9 @@ li {
 
 .carousel::after, .image-reel::after {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='100,50 20,100 20,0' fill='%23fff'/%3E%3C/svg%3E");
+}
+
+/* Hide navigation arrows */
+.carousel__navigation, .carousel__navigation-button {
+  display: none;
 }

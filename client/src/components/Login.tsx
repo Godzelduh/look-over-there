@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import type { ChangeEvent, FormEvent } from 'react';
 
 import { useMutation } from '@apollo/client';
@@ -6,6 +7,7 @@ import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 import type { User } from '../models/User';
 import LookoverthereLogo1 from '../assets/LookoverthereLogo1.jpg';
+import LoginGif from '../assets/planegif.webp'; // Import the GIF
 import '../Styles/login.css' 
 
 const Login = () => {
@@ -52,8 +54,12 @@ const Login = () => {
   return (
     
     <>
-    <img src={LookoverthereLogo1} alt="LookHere!!!" className="nav-logo" />
-    <h2>Log in to your account!</h2>
+    <Link to="/">
+      <img src={LookoverthereLogo1} alt="LookHere!!!" className="nav-logo" />
+    </Link>
+    <h2>Welcome Back!</h2>
+        <p className="welcome-message">Log in to continue your adventure!</p>
+        <img src={LoginGif} alt="Login GIF" className="login-gif" />
       <form onSubmit={handleFormSubmit}>
 
          <div className='form'>
