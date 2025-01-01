@@ -81,7 +81,21 @@ const resolvers = {
         },
         //fetch all challenges
         getChallenges: async () => {
-            return Challenge.find();
+            const challenges = await Challenge.find({});
+            console.log("Fetched Challenges:", challenges); 
+            return challenges.map((challenge) => ({
+              id: challenge._id,
+              name: challenge.name || "Unnamed Challenge",
+              location: challenge.location || { type: "Point", coordinates: [] }, 
+              image_url: challenge.image_url || "default-placeholder.jpg", 
+              task: challenge.task || "No task specified", 
+              address: challenge.address || "Address not available", 
+              question: challenge.question || "No question provided", 
+              answer: challenge.answer || "No answer provided", 
+              photo_instruction: challenge.photo_instruction || "No instructions provided", 
+              physical_task_info: challenge.physical_task_info || "No physical task info", 
+              verification_method: challenge.verification_method || "No verification method", 
+            }));
         },
         //fetch all challenges for a user
         getChallengeProgress: async (_:any, {userId}: {userId: string}) => {
