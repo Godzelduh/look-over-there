@@ -1,4 +1,4 @@
-import '../Styles/ChallangeCarousel.css'
+import '../Styles/ChallengeCarousel.css'
 import '../Styles/ImageCarousel.css'
 import ScavengerHunting from '../assets/ScavengerHunting.avif';
 import TestImage from '../assets/testimage.jpg';
@@ -25,7 +25,7 @@ const ImageReel = () => {
                                             key={index}
                                             src={image}
                                             alt={`Image of different places`}
-                                        
+                                            className='image-style'
                                         />
                                    
                                     <a href={`#imageReel__slide${index === 0 ? images.length : index}`} className="image-reel__prev">Go to previous slide</a>

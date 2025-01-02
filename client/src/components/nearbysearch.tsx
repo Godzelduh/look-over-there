@@ -34,7 +34,7 @@ const NearbySearch: React.FC = () => {
                 longitude: userLocation ? userLocation.longitude : 0,
             },
             radius: 18000,
-            type: 'tourist_attraction',
+            type: 'restaurant',
             excludedTypes: ['theme_park', 'zoo'],
         },
         skip: !userLocation,
