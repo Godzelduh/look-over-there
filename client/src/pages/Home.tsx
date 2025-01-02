@@ -92,19 +92,21 @@ const Home = () => {
         const type = "Tourist Attraction"; // Static type
         const name = place.name || "Unnamed Challenge"; // Fallback name
         const task = `Visit ${place.name}`; 
+        const address = place.formatted_address || "Address not available"; // Fallback address
         // Log the challenge input for debugging
         console.log('Creating Challenge:', {
           type,
           location,
           image_url,
           name,
+          address,
           task
         });
   
         try {
           // Execute the mutation
           const { data } = await createChallengeMutation({
-            variables: { input: { type, location, image_url, name } },
+            variables: { input: { type, location, image_url, name, address, task } },
           });
   
           // Handle successful challenge creation

@@ -123,6 +123,8 @@ getUser(id: ID!): User
 getChallenges: [Challenge]!
 getChallengeProgress(userId: ID!): [ChallengeProgress]!
 me: User
+#new for near challenges by me - to be implemented in original folder
+getChallengesNear(location: LocationInput!, maxDistance: Float!): [Challenge]
 }
 
 #for TextSearch in external API
@@ -157,7 +159,11 @@ updateChallengeProgress(input: UpdateProgressInput!): ChallengeProgress
 
 #createChallengeProgress -> to be implemented
 createChallengeProgress(userId: ID!, challengeId: ID!): ChallengeProgress
+
+#markChallengeCompleted -> to be implemented
+markChallengeCompleted(id: ID!): ChallengeProgress!
 }
+
 `;
 
 export default typeDefs;

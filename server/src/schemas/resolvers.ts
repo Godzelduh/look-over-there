@@ -58,6 +58,13 @@ interface AddUserArgs {
     query: string;
   }
 
+  //new for near challenges by me - to be implemented in original folder
+  interface LocationInput {
+    type: string;
+    coordinates: [number, number];
+    name?: string;
+  }
+
   //for NearbySearch in external API
 interface NearbySearchArgs {
     location: {
@@ -96,6 +103,27 @@ const resolvers = {
               physical_task_info: challenge.physical_task_info || "No physical task info", 
               verification_method: challenge.verification_method || "No verification method", 
             }));
+        },
+         //fetch challenges from db near a location within a certain distance
+         getChallengesNear: async (_: any, { location, maxDistance }: { location: LocationInput; maxDistance: number }) => {
+          const { type, coordinates } = location;
+        
+          if (!type || !coordinates || coordinates.length !== 2) {
+            throw new Error('Invalid location input');
+          }
+        
+          return await Challenge.find({
+            location: {
+              $near: {
+                $geometry: {
+                  type: 'Point',
+                  coordinates: coordinates,
+                  name: location.name || 'Unnamed Location',
+                },
+                $maxDistance: maxDistance,
+              },
+            },
+          }).select("address image_url location name task");
         },
         //fetch all challenges for a user
         getChallengeProgress: async (_:any, {userId}: {userId: string}) => {
@@ -178,6 +206,33 @@ const resolvers = {
 
 
     Mutation: {
+      //mark a challenge as completed 
+      markChallengeCompleted: async (_: any, { challengeId }: { challengeId: string }, context: any) => {
+        const userId = context.user.id;
+      
+        let progress = await ChallengeProgress.findOne({ user_id: userId, challenge_id: challengeId });
+      
+        if (progress) {
+          if (progress.status === 'completed') {
+            throw new Error('Challenge already completed.');
+          }
+      
+          progress.status = 'completed';
+          progress.completion_time = new Date();
+          await progress.save();
+          return progress;
+        }
+      
+        const newProgress = new ChallengeProgress({
+          user_id: userId,
+          challenge_id: challengeId,
+          status: 'completed',
+          completion_time: new Date(),
+        });
+      
+        await newProgress.save();
+        return newProgress;
+      },
         //Create a new user
         createUser: async (_:any, {input}:AddUserArgs) => {
             const user = await User.create({ ...input});

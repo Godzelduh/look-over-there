@@ -14,7 +14,7 @@ interface IChallenge extends Document {
       physical_task_info?: string;
       verification_method?: string;
       address?: string;
-      name: string;
+      name?: string;
 }
 
 const ChallengeSchema = new Schema<IChallenge>({
@@ -67,7 +67,7 @@ const ChallengeSchema = new Schema<IChallenge>({
     },
     name: {
         type: String,
-        required: true
+        required: false
     }
 
 },
