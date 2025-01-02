@@ -5,7 +5,7 @@ import { GET_PLACES } from '../utils/queries';
 import { useLazyQuery } from '@apollo/client';
 import { useState } from 'react';
 import CarouselImageReel from '../components/CarouselImageReel';
-import ChallengeCard from '../components/ChallangeCard';
+import ChallengeCard from '../components/ChallengeCard';
 
 import { useMutation } from '@apollo/client';
 import { CREATE_CHALLENGE } from '../utils/mutations';
@@ -153,6 +153,7 @@ const Home = () => {
               <select
                 value={searchType}
                 onChange={e => setSearchType(e.target.value)} 
+                className="input"
               >
                 <option value="Tourist Attractions">Tourist Attractions</option>
                 {/*<option value="Landmarks">Landmarks</option>*/}
@@ -168,7 +169,7 @@ const Home = () => {
           type='submit'
           className="log-in"
         >
-          Search for your Scavenger Hunt
+          Search
         </button>
       </form>
 

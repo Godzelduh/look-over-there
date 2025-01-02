@@ -99,3 +99,24 @@
 .image-reel:focus-within .image-reel__snapper {
   animation-name: none;
 }
+
+.image-reel::before,
+.image-reel__prev {
+    left: -1rem;
+    display: none;
+}
+
+.image-reel::after,
+.image-reel__next {
+    right: -1rem;
+    display: none;
+}
+
+.image-reel {
+  height: 50vh;
+}
+@media screen and (max-width: 450px) {
+  .image-reel {
+    height: 30vh;
+  }
+ }

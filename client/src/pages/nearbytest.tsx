@@ -5,7 +5,7 @@ import { CREATE_CHALLENGE } from '../utils/mutations';
 import { useUserLocation } from "../utils/userLocation.ts";
 import Auth from '../utils/auth';
 import CarouselImageReel from '../components/CarouselImageReel';
-import ChallengeCard from '../components/ChallangeCard';
+import ChallengeCard from '../components/ChallengeCard';
 import { CSSProperties } from 'react';
 
 const styles: { container: CSSProperties; image: CSSProperties } = {
