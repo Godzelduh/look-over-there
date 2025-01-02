@@ -51,6 +51,7 @@ export const CREATE_CHALLENGE = gql`
     createChallenge(input: $input) {
       id
       name
+      address
       location {
         type
         coordinates
@@ -61,3 +62,12 @@ export const CREATE_CHALLENGE = gql`
     }
   } 
 `
+export const MARK_CHALLENGE_COMPLETE = gql`
+  mutation MarkChallengeComplete($id: ID!) {
+    markChallengeComplete(id: $id) {
+      id
+      status
+      completion_time
+    }
+  }
+`;

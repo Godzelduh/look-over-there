@@ -26,9 +26,21 @@ export const GET_USER = gql`
 export const GET_CHALLENGES = gql`
   query GetChallenges {
     getChallenges {
-      id
-      title
-      description
+     id
+    name
+    location {
+      type
+      coordinates
+      name
+    }
+    image_url
+    task
+    address
+    question
+    answer
+    photo_instruction
+    physical_task_info
+    verification_method
     }
   }
 `;
@@ -97,6 +109,24 @@ export const GET_NEARBY_PLACES = gql`
           lng
         }
       }
+    }
+  }
+`;
+
+// getting challenges near a location  - added by me to be implemented in original folder
+export const GET_CHALLENGES_NEAR = gql`
+  query GetChallengesNear($location: LocationInput!, $maxDistance: Float!) {
+    getChallengesNear(location: $location, maxDistance: $maxDistance) {
+      id
+      name
+      address
+      location {
+        type
+        coordinates
+        name
+      }
+      image_url
+      task
     }
   }
 `;
