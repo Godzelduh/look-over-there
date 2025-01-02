@@ -117,7 +117,7 @@ const resolvers = {
               $near: {
                 $geometry: {
                   type: 'Point',
-                  coordinates: coordinates,
+                  coordinates: location.coordinates,
                   name: location.name || 'Unnamed Location',
                 },
                 $maxDistance: maxDistance,
