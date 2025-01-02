@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import type { ChangeEvent, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
@@ -9,6 +10,7 @@ import '../Styles/login.css'
 // //import { createUser } from '../utils/API';
  import Auth from '../utils/auth';
  import type { User } from '../models/User';
+ import signuppisa from '../assets/signuppisa.jpg';
  import LookoverthereLogo1 from '../assets/LookoverthereLogo1.jpg';
 
 //const SignupForm = () => {
@@ -68,9 +70,15 @@ const Signup = () => {
 
   return (
     <>
-    <img src={LookoverthereLogo1} alt="LookHere!!!" className="nav-logo" />
+    <Link to="/">
+      <img src={LookoverthereLogo1} alt="LookHere!!!" className="nav-logo" />
+    </Link>
      {/* This is needed for the validation functionality above */}
      <h2>Sign up for your account!</h2>
+     <div className="image-container">
+        <img src={signuppisa} alt="Signup" className="signup-image left" />
+        <img src={signuppisa} alt="Signup" className="signup-image right" />
+      </div>
      <form onSubmit={handleFormSubmit}>
 
       <div className='form'>

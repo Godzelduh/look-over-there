@@ -1,0 +1,118 @@
+body {
+    background: url('../assets/signuppisa.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  
+  .signup-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+  }
+  
+  .nav-logo {
+    height: 80px;
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    color: #333;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  
+  .image-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 20px;
+  }
+  
+  .signup-image {
+    width: 45%;
+    max-width: 150px; /* Adjust the max-width to control the image size */
+  }
+  
+  .signup-image.left {
+    transform: scaleX(-1); /* Mirror the left image */
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  input {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  button {
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
+  
+  .submit-button {
+    background-color: #28a745;
+    margin-top: 20px;
+  }
+  
+  .submit-button:hover {
+    background-color: #218838;
+  }
+  
+  .log-in {
+    color: rgba(255, 253, 253, 0.87);
+    font-size: 1rem;
+    font-weight: 400;
+    width: 50%;
+    height: 35px;
+    padding-top: 10px;
+    margin-bottom: 20px;
+    background-color: transparent;
+    border-bottom: white 1px solid;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+  }
+  
+  .log-in::placeholder {
+    color: black; /* Change 'red' to any color you prefer */
+    opacity: 0.5; /* Optional: Adjusts the opacity of the placeholder */
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }

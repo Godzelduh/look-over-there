@@ -49,14 +49,25 @@ export const SAVE_LOCATION = gql`
 export const CREATE_CHALLENGE = gql`
   mutation createChallenge($input: ChallengeInput!) {
     createChallenge(input: $input) {
-      id 
-      type
-      location
-      task
+      id
+      name
+      address
+      location {
+        type
+        coordinates
+        name
+      }
       image_url
-      
+      task
     }
   } 
-
-
 `
+export const MARK_CHALLENGE_COMPLETE = gql`
+  mutation MarkChallengeComplete($id: ID!) {
+    markChallengeComplete(id: $id) {
+      id
+      status
+      completion_time
+    }
+  }
+`;

@@ -11,6 +11,8 @@ import Login from './components/Login.js'
 import Signup from './components/Signup.js'
 import TestPage from './pages/test.jsx'
 import GPSLocation   from "./components/GPS.tsx";
+import NearbySearch from './pages/nearbySearch.jsx'
+import NearbyTest from "./pages/nearbytest.tsx";
 
 import './Styles/index.css'
 
@@ -51,7 +53,16 @@ const router = createBrowserRouter([
        },
       {
         path: '/GPSLocation',
-        element: <GPSLocation />,
+        element: <GPSLocation/>,
+      },
+      {
+        path: '/nearbySearch',
+        element: <NearbySearch />
+      },
+      {
+        path: '/nearbyTest',
+        element: <NearbyTest />
+
       }
     ]
   }

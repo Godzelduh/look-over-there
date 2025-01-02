@@ -13,7 +13,7 @@ preferences: Preferences
 }
 
 type Location {
-type: String!
+type: String
 coordinates: [Float]!
 name: String
 }
@@ -28,7 +28,7 @@ type Challenge {
 id: ID!
 type: String!
 location: Location!
-task: String!
+task: String
 image_url: String!
 question: String
 answer: String
@@ -36,6 +36,7 @@ photo_instruction: String
 physical_task_info: String
 verification_method: String
 address: String
+name: String
 }
 
 # ChallengeProgress type
@@ -67,11 +68,21 @@ photos: [String]!
 geometry: Geometry!
 }
 
+#extend type place to include nearby address
+extend type Place {
+vicinity: String!
+}
+
 # Input types
 input LocationInput {
 type: String!
 coordinates: [Float]!
 name: String
+}
+
+input nearbyLocationInput { 
+latitude: Float!
+longitude: Float!
 }
 
 input CreateUserInput {
@@ -83,7 +94,7 @@ password: String!
 input ChallengeInput {
 type: String!
 location: LocationInput!
-task: String!
+task: String
 image_url: String!
 question: String
 answer: String
@@ -91,6 +102,7 @@ photo_instruction: String
 physical_task_info: String
 verification_method: String
 address: String
+name: String
 }
 
 input UpdateProgressInput {
@@ -111,6 +123,8 @@ getUser(id: ID!): User
 getChallenges: [Challenge]!
 getChallengeProgress(userId: ID!): [ChallengeProgress]!
 me: User
+#new for near challenges by me - to be implemented in original folder
+getChallengesNear(location: LocationInput!, maxDistance: Float!): [Challenge]
 }
 
 #for TextSearch in external API
@@ -118,6 +132,11 @@ me: User
 
  textSearch(query: String!): [Place]!
  }
+ 
+#for NearbySearch in external API
+extend type Query {
+nearbySearch(location: nearbyLocationInput!, radius: Int!, type: String!, excludedTypes:[String]!): [Place]!
+}
  
 #Mutations
 type Mutation {
@@ -140,7 +159,11 @@ updateChallengeProgress(input: UpdateProgressInput!): ChallengeProgress
 
 #createChallengeProgress -> to be implemented
 createChallengeProgress(userId: ID!, challengeId: ID!): ChallengeProgress
+
+#markChallengeCompleted -> to be implemented
+markChallengeCompleted(id: ID!): ChallengeProgress!
 }
+
 `;
 
 export default typeDefs;
