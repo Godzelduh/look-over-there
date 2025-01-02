@@ -3,6 +3,8 @@ import User from "../models/User.js";
 import ChallengeProgress from "../models/ChallengeProgress.js";
 import Challenge from "../models/Challenge.js";
 import {signToken, AuthenticationError} from "../utils/auth.js";
+import Hunt from "../models/Hunt.js";
+import mongoose from 'mongoose';
 
 interface AddUserArgs {
     input: {
@@ -85,6 +87,27 @@ const resolvers = {
         //fetch a single user by id
         getUser: async (_: any, { id }: { id: string })=>{
             return User.findById(id).populate("progress");
+        },
+         //get all hunts new updation for hunt JAn2
+         getAllHunts: async () => {
+          try {
+            return await Hunt.find({});
+          } catch (error) {
+            console.error("Error fetching hunts:", error);
+            throw new Error("Unable to fetch hunts.");
+          }
+        },
+         //fetch all hunts  by a user --> new in final folder jan 2 
+         getHuntsByUser: async (_: any, { userId }: { userId: string }) => {
+          const hunt = await Hunt.findOne({ user_id: userId })//.populate("challenges.challenge_id");
+          if (!hunt) {
+            throw new Error("No hunt found for the user.");
+          }
+        
+          // Validate challenges
+          hunt.challenges = hunt.challenges.filter((challenge: any) => challenge.challenge_id);
+        
+          return hunt;
         },
         //fetch all challenges
         getChallenges: async () => {
@@ -206,6 +229,58 @@ const resolvers = {
 
 
     Mutation: {
+            // Create a new hunt new in final folder jan 2
+            addChallengesToHunt: async (_: any, { input }: any) => {
+              const { user_id, challenges } = input;
+            
+              // Validate user_id
+              if (!mongoose.Types.ObjectId.isValid(user_id)) {
+                throw new Error("Invalid user_id. Must be a valid ObjectId.");
+              }
+            
+              // Validate and convert challenge_id for all challenges
+              const validatedChallenges = challenges.map((challenge: any) => {
+                if (!mongoose.Types.ObjectId.isValid(challenge.challenge_id)) {
+                  throw new Error(`Invalid challenge_id: ${challenge.challenge_id}. Must be a valid ObjectId.`);
+                }
+            
+                return {
+                  ...challenge,
+                  challenge_id: new mongoose.Types.ObjectId(challenge.challenge_id), // Convert to ObjectId
+                };
+              });
+            
+              // Check if the hunt already exists for the user
+              let hunt = await Hunt.findOne({ user_id: new mongoose.Types.ObjectId(user_id) });
+            
+              // Handle the case where `hunt` is null
+              if (!hunt) {
+                console.log("No hunt found for the user. Creating a new one.");
+                hunt = new Hunt({ 
+                  user_id: new mongoose.Types.ObjectId(user_id), 
+                  challenges: validatedChallenges 
+                });
+              } else {
+                console.log("Existing hunt found. Adding new challenges if not duplicates.");
+                
+                // Add only unique challenges to the existing hunt
+                validatedChallenges.forEach((challenge: any) => {
+                  if (!hunt!.challenges.some((c: any) => c.challenge_id.toString() === challenge.challenge_id.toString())) {
+                    hunt!.challenges.push(challenge);
+                  }
+                });
+              }
+            
+              // Save the updated or newly created hunt
+              try {
+                await hunt.save();
+                console.log("Hunt saved successfully.");
+                return hunt;
+              } catch (error) {
+                console.error("Error saving hunt:", error);
+                throw new Error("Failed to save the hunt.");
+              }
+            },
       //mark a challenge as completed 
       markChallengeCompleted: async (_: any, { challengeId }: { challengeId: string }, context: any) => {
         const userId = context.user.id;
