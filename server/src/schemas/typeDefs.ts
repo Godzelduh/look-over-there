@@ -205,6 +205,9 @@ createChallengeProgress(userId: ID!, challengeId: ID!): ChallengeProgress
 #markChallengeCompleted -> to be implemented
 markChallengeCompleted(id: ID!): ChallengeProgress!
 
+#markChallengeAsCompleted -> to be implemented new added in final folder on jan 2 - needs to be added to original folder
+updateHuntProgress(userId: ID!, challengeId: ID!,status: String!): HuntChallenge!
+
 #addChallengesToHunter -> to be implemented new added in final folder on jan 2
 addChallengesToHunt(input: HuntInput!): Hunt
 }

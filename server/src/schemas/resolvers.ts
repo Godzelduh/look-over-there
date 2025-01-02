@@ -281,6 +281,33 @@ const resolvers = {
                 throw new Error("Failed to save the hunt.");
               }
             },
+
+            //mark hunt as completed new in final folder jan 2    
+updateHuntProgress: async (_: any, { userId, challengeId, status }: any) => {
+  // Find the hunt for the user
+  const hunt = await Hunt.findOne({ user_id: userId });
+
+  if (!hunt) {
+    throw new Error("Hunt not found for the user.");
+  }
+
+  // Find the specific challenge in the user's hunt
+  const challenge = hunt.challenges.find((c) => c.challenge_id.toString() === challengeId);
+
+  if (!challenge) {
+    throw new Error("Challenge not found in user's hunt.");
+  }
+
+  // Update the status and set completion time if the status is 'completed'
+  challenge.status = status;
+  if (status === "completed") {
+    challenge.completion_time = new Date();
+  }
+
+  // Save the updated hunt
+  await hunt.save();
+  return challenge;
+},
       //mark a challenge as completed 
       markChallengeCompleted: async (_: any, { challengeId }: { challengeId: string }, context: any) => {
         const userId = context.user.id;
