@@ -22,11 +22,18 @@
     -ms-overflow-style: none;
 }
 
+
+
 ol,
 li {
     list-style: none;
     margin: 0;
     padding: 0;
+}
+
+.h2-header {
+    font-size: 25px;
+    margin-bottom: 5px;
 }
 
 .image-container {
@@ -48,25 +55,29 @@ li {
 }
 
 .image-style {
-    height: 525px;
+    height: 100%;
     width: 100%;
     border-radius: 50px;
 }
 .carousel, .image-reel {
     position: relative;
-    height: 525px;
+    height: 75vh;
     filter: drop-shadow(0 0 10px #0003);
     perspective: 100px;
     background-color: #0a3c44;
     border-radius: 50px;
-    width:700px;
+    width:150%;
+    margin-left: -25%;
 }
 
 .carousel-container {
-  width: 700px;
-  height: 400px; /* Set a height for the carousel container */
+ /* Set a height for the carousel container */
   position: relative;
   overflow: hidden;
+  border-radius: 50px;
+  width:150%;
+  margin-left: -25%;
+  
 }
 
 .carousel__viewport, .image-reel__viewport {
@@ -77,6 +88,8 @@ li {
   left: 0;
   display: flex;
   overflow: hidden;
+  border-radius: 50px;
+  align-items: stretch;
 }
 
 .carousel__slide, .image-reel__slide {
@@ -84,12 +97,15 @@ li {
   flex: 0 0 100%;
   width: 100%;
   height: 100%; /* Ensure slides take up the full height of the container */
+  overflow: hidden; /* Add this to hide any overflow */
+    
 }
 
 .carousel__slide img, .image-reel__slide img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ensure images cover the entire slide area */
+  object-fit: cover; 
+  display: block;
 }
 
 .carousel__slide:before, .image-reel__slide:before {
@@ -164,17 +180,14 @@ li {
 }
 
 .carousel::before,
-.carousel__prev,
-.image-reel::before,
-.image-reel__prev {
+.carousel__prev {
     left: -1rem;
 }
 
 .carousel::after,
-.carousel__next,
-.image-reel::after,
-.image-reel__next {
+.carousel__next {
     right: -1rem;
+
 }
 
 .carousel::before,
@@ -206,3 +219,60 @@ li {
 .carousel__navigation, .carousel__navigation-button {
   display: none;
 }
+
+.input {
+    color: rgba(255, 253, 253, 0.87);
+    font-size: 1rem;
+    font-weight: 400;
+    width: 200px;
+    height: 35px;
+    padding-top: 10px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    background-color: transparent;
+    border-bottom: white 1px solid;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.input::placeholder {
+    color: black; /* Change 'red' to any color you prefer */
+    opacity: 0.5; /* Optional: Adjusts the opacity of the placeholder */
+  }
+
+  @media screen and (max-width: 970px) {
+    .image-style {
+        height: 45vh;
+        width: 100%;
+
+    }
+    .carousel, .image-reel {
+ 
+        height: 45vh;
+        width:100%;
+        margin-left: 0%;
+    }
+   }
+  @media screen and (max-width: 768px) {
+    .image-style {
+        height: 45vh;
+        width: 100%;
+    }
+    .carousel, .image-reel {
+ 
+        height: 45vh;
+        width:100%;
+        margin-left: 0%;
+    }
+   }
+   @media screen and (max-width: 450px) {
+    .image-style {
+        width: 75%;
+    }
+    .carousel, .image-reel {
+        width:75%;
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+   }
