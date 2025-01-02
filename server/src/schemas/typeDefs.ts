@@ -23,6 +23,23 @@ preferred_types: [String]
 difficulty: String
 }
 
+# Hunt type (for fetching hunts)
+type Hunt {
+  id: ID! # The unique ID for the hunt
+  user_id: ID! # The user associated with this hunt
+  challenges: [HuntChallenge!]!
+}
+
+type HuntChallenge {
+  challenge_id: ID! # Unique ID for the challenge
+  name: String
+  location: Location
+  address: String
+  image_url: String
+  status: String
+  completion_time: String
+}
+
 # Challenge type
 type Challenge {
 id: ID!
@@ -46,6 +63,18 @@ user_id: ID!
 challenge_id: Challenge! #was ID! updated to Challenge type to return challenge details
 status:String!
 completion_time: String
+}
+
+# HuntChallenge type  new added in final folder on jan 2
+# HuntChallengeInput type (for challenges in HuntInput)
+input HuntChallengeInput {
+  challenge_id: ID!
+  name: String
+  location: LocationInput
+  address: String
+  image_url: String!
+  status: String
+  completion_time: String
 }
 
 # Geometry type
@@ -78,6 +107,13 @@ input LocationInput {
 type: String!
 coordinates: [Float]!
 name: String
+}
+
+#inout for Hunt type new added in final folder on jan 2
+# HuntInput type
+input HuntInput {
+  user_id: ID!
+  challenges: [HuntChallengeInput!]!
 }
 
 input nearbyLocationInput { 
@@ -125,6 +161,12 @@ getChallengeProgress(userId: ID!): [ChallengeProgress]!
 me: User
 #new for near challenges by me - to be implemented in original folder
 getChallengesNear(location: LocationInput!, maxDistance: Float!): [Challenge]
+
+#new for getHuntsByUser - in final folder on jan 2
+getHuntsByUser(userId: ID!): Hunt
+#new for getAllHunts - in final folder on jan 2
+getAllHunts: [Hunt]
+
 }
 
 #for TextSearch in external API
@@ -162,6 +204,9 @@ createChallengeProgress(userId: ID!, challengeId: ID!): ChallengeProgress
 
 #markChallengeCompleted -> to be implemented
 markChallengeCompleted(id: ID!): ChallengeProgress!
+
+#addChallengesToHunter -> to be implemented new added in final folder on jan 2
+addChallengesToHunt(input: HuntInput!): Hunt
 }
 
 `;
