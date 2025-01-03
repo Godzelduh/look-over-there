@@ -118,7 +118,7 @@ const Profile: React.FC = () => {
            
         //  });
         const { data } = await updateHuntProgress({
-          variables: { userId, challengeId, status },
+          variables: { userId, challengeId, status : 'completed'},
         });
         alert(`Challenge marked as completed!`);
         console.log('Challenge completion response:', data);
@@ -173,7 +173,7 @@ const Profile: React.FC = () => {
                   backgroundColor: isNear ? 'Green' : 'Red',
                   color: 'Black',
                   border: 'none',
-                  // cursor: isNear ? 'pointer' : 'not-allowed',
+                  cursor: isNear ? 'pointer' : 'not-allowed',
                 }}
               >
                 {isNear ? 'Completed' : 'Not Near'}
