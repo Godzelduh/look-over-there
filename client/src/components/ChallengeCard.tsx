@@ -8,7 +8,7 @@ const ChallengeCard = ({ places }: { places: Place[] }) => {
     return (
         <>
             <div >
-                <h2 className= 'h2-header'>Preview of your Hunt!</h2> 
+                <h3 className= 'h2-header'>Preview of your Hunt!</h3> 
                 <div className='carousel' aria-label="Gallery">
                 <ol className="carousel__viewport">
                     {places.map((place: Place, index: number) => (
