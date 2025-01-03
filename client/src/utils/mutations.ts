@@ -71,3 +71,25 @@ export const MARK_CHALLENGE_COMPLETE = gql`
     }
   }
 `;
+
+// new added to final on jan 2
+export const ADD_CHALLENGES_TO_HUNT = gql`
+  mutation addChallengesToHunt($input: HuntInput!) {
+    addChallengesToHunt(input: $input) {
+      id
+      challenges {
+        challenge_id
+        name
+        location {
+          type
+          coordinates
+          name
+        }
+        address
+        image_url
+        status
+        completion_time
+      }
+    }
+  }
+`;
