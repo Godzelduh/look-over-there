@@ -1,12 +1,16 @@
 import '../Styles/ChallangeCarousel.css'
 import '../Styles/ImageCarousel.css'
 import ScavengerHunting from '../assets/ScavengerHunting.avif';
-import TestImage from '../assets/testimage.jpg';
-import LookoverthereLogo1 from '../assets/LookoverthereLogo1.jpg';
+import TravelColosseum from '../assets/travelcolosseum.jpg';
+import TravelMountains from '../assets/travelmountains.jpg';
+import TravelSeoulTower from '../assets/travelseoultower.jpg';
+import TravelChicagoBean from '../assets/travelchicagobean.jpg';
 const images: string[] = [
     ScavengerHunting,
-    TestImage,
-    LookoverthereLogo1,
+    TravelColosseum,
+    TravelMountains,
+    TravelSeoulTower,
+    TravelChicagoBean
 ];
 //list components containing images
 

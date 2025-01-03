@@ -1,6 +1,7 @@
 import React from 'react';
 import { CSSProperties } from 'react';
 import travelingmap from '../assets/travelingmap.jpg';
+import TravelTopFiveChoices from '../assets/traveltopfivechoices.png';
 
   const styles: { [key: string]: CSSProperties } = {
     container: {
@@ -20,9 +21,10 @@ import travelingmap from '../assets/travelingmap.jpg';
       border: '1px solid #ccc',
       borderRadius: '8px',
       transition: 'box-shadow 0.3s ease',
+      backgroundColor: 'blue',
     },
     boxTitle: {
-      fontSize: '20px',
+      fontSize: '25px',
       fontWeight: 'bold',
       marginBottom: '10px',
       color: '#007bff',
@@ -30,7 +32,7 @@ import travelingmap from '../assets/travelingmap.jpg';
     boxContent: {
       fontSize: '16px',
       lineHeight: '1.5',
-      color: '#333',
+      color: '#fff',
     },
     highlight: {
       fontWeight: 'bold',
@@ -43,6 +45,22 @@ import travelingmap from '../assets/travelingmap.jpg';
       maxWidth: '100%',
       height: 'auto',
     },
+    topChoicesContainer: {
+      display: 'grid',
+      gridTemplateColumns: '1fr 1fr',
+      gap: '20px',
+      marginTop: '40px',
+      padding: '20px',
+      border: '1px solid #ccc',
+      borderRadius: '8px',
+      backgroundColor: '#f9f9f9',
+    },
+    topChoiceItem: {
+      padding: '10px',
+      border: '1px solid #ccc',
+      borderRadius: '8px',
+      backgroundColor: '#fff',
+    }
   };
   
   const AboutUs: React.FC = () => (
@@ -70,7 +88,10 @@ import travelingmap from '../assets/travelingmap.jpg';
       <div style={styles.imageContainer}>
         <img src={travelingmap} alt="Travel" style={styles.image} />
       </div>
-    </div>
-);
-
+    
+          <div className="side-image-container">
+          <img src={TravelTopFiveChoices} alt="Top 5 Choices" className="side-image" />
+          </div>
+          </div>
+  );
 export default AboutUs;

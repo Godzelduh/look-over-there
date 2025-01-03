@@ -11,6 +11,7 @@ import { useMutation } from '@apollo/client';
 import { CREATE_CHALLENGE } from '../utils/mutations';
 // import { GET_ME } from '../utils/queries';
 import Auth from '../utils/auth';
+import '../Styles/App.css';
 
 //import { text } from 'express';
 
@@ -44,12 +45,14 @@ const Home = () => {
   });*/
   //console.log(textQuery)
   //console.log(data)
+  
   const places = data?.textSearch;
   console.log("Places",places)
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setTextQuery(event.target.value);
 
   };
+  
 
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -183,7 +186,7 @@ const Home = () => {
         </button>
         </div>
       )}
-    </div>
+  </div>
   );
 };
 
