@@ -3,6 +3,7 @@ import { CSSProperties } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
 import { GET_PLACES } from '../utils/queries';
 import { useLazyQuery } from '@apollo/client';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import CarouselImageReel from '../components/CarouselImageReel';
 import ChallengeCard from '../components/ChallengeCard';
@@ -34,6 +35,8 @@ const styles: { container: CSSProperties; image: CSSProperties } = {
 const Home = () => {
   const [textQuery, setTextQuery] = useState<string>('');
   const [searchType, setSearchType] = useState<string>('Tourist Attractions');
+  //use navigate to revert to login page when not logged in
+  const navigate = useNavigate();
 
   const [loadPlaces, { called, loading, data }] = useLazyQuery(GET_PLACES)
   // const [createChallengeMutation] = useMutation(CREATE_CHALLENGE)
@@ -139,6 +142,7 @@ const Home = () => {
   const handleCreateChallenge = async () => {
     if (!Auth.loggedIn()) {
       alert('You need to be logged in to save a challenge!');
+      navigate('/login')
       return;
     }
   
@@ -186,6 +190,7 @@ const Home = () => {
     } catch (err) {
       console.error('Unexpected error while adding challenges to Hunt:', err);
       alert('Failed to save challenges to Hunt.');
+      
     }
   };
 
