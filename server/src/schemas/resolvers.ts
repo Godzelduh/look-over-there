@@ -3,6 +3,8 @@ import User from "../models/User.js";
 import ChallengeProgress from "../models/ChallengeProgress.js";
 import Challenge from "../models/Challenge.js";
 import {signToken, AuthenticationError} from "../utils/auth.js";
+import Hunt from "../models/Hunt.js";
+import mongoose from 'mongoose';
 
 interface AddUserArgs {
     input: {
@@ -86,6 +88,27 @@ const resolvers = {
         getUser: async (_: any, { id }: { id: string })=>{
             return User.findById(id).populate("progress");
         },
+         //get all hunts new updation for hunt JAn2
+         getAllHunts: async () => {
+          try {
+            return await Hunt.find({});
+          } catch (error) {
+            console.error("Error fetching hunts:", error);
+            throw new Error("Unable to fetch hunts.");
+          }
+        },
+         //fetch all hunts  by a user --> new in final folder jan 2 
+         getHuntsByUser: async (_: any, { userId }: { userId: string }) => {
+          const hunt = await Hunt.findOne({ user_id: userId })//.populate("challenges.challenge_id");
+          if (!hunt) {
+            throw new Error("No hunt found for the user.");
+          }
+        
+          // Validate challenges
+          hunt.challenges = hunt.challenges.filter((challenge: any) => challenge.challenge_id);
+        
+          return hunt;
+        },
         //fetch all challenges
         getChallenges: async () => {
             const challenges = await Challenge.find({});
@@ -117,7 +140,7 @@ const resolvers = {
               $near: {
                 $geometry: {
                   type: 'Point',
-                  coordinates: coordinates,
+                  coordinates: location.coordinates,
                   name: location.name || 'Unnamed Location',
                 },
                 $maxDistance: maxDistance,
@@ -206,6 +229,81 @@ const resolvers = {
 
 
     Mutation: {
+            // Create a new hunt new in final folder jan 2
+            addChallengesToHunt: async (_: any, { input }: any) => {
+              const { user_id, challenges } = input;
+            
+              // Validate user_id
+              if (!mongoose.Types.ObjectId.isValid(user_id)) {
+                throw new Error("Invalid user_id. Must be a valid ObjectId.");
+              }
+            
+              // Generate challenge_id if not provided
+        const validatedChallenges = challenges.map((challenge: any) => ({
+          ...challenge,
+          challenge_id: mongoose.Types.ObjectId.isValid(challenge.challenge_id)
+            ? challenge.challenge_id
+            : new mongoose.Types.ObjectId(), // Generate new ObjectId if not valid
+        }));
+            
+              // Check if the hunt already exists for the user
+              let hunt = await Hunt.findOne({ user_id});
+            
+              // Handle the case where `hunt` is null
+              if (!hunt) {
+                console.log("No hunt found for the user. Creating a new one.");
+                hunt = new Hunt({ 
+                  user_id, 
+                  challenges: validatedChallenges 
+                });
+              } else {
+                console.log("Existing hunt found. Adding new challenges if not duplicates.");
+                
+                // Add only unique challenges to the existing hunt
+                validatedChallenges.forEach((challenge: any) => {
+                  if (!hunt!.challenges.some((c: any) => c.challenge_id.toString() === challenge.challenge_id.toString())) {
+                    hunt!.challenges.push(challenge);
+                  }
+                });
+              }
+            
+              // Save the updated or newly created hunt
+              try {
+                await hunt.save();
+                console.log("Hunt saved successfully.");
+                return hunt;
+              } catch (error) {
+                console.error("Error saving hunt:", error);
+                throw new Error("Failed to save the hunt.");
+              }
+            },
+
+            //mark hunt as completed new in final folder jan 2    
+updateHuntProgress: async (_: any, { userId, challengeId, status }: any) => {
+  // Find the hunt for the user
+  const hunt = await Hunt.findOne({ user_id: userId });
+
+  if (!hunt) {
+    throw new Error("Hunt not found for the user.");
+  }
+
+  // Find the specific challenge in the user's hunt
+  const challenge = hunt.challenges.find((c) => c.challenge_id.toString() === challengeId);
+
+  if (!challenge) {
+    throw new Error("Challenge not found in user's hunt.");
+  }
+
+  // Update the status and set completion time if the status is 'completed'
+  challenge.status = status;
+  if (status === "completed") {
+    challenge.completion_time = new Date();
+  }
+
+  // Save the updated hunt
+  await hunt.save();
+  return challenge;
+},
       //mark a challenge as completed 
       markChallengeCompleted: async (_: any, { challengeId }: { challengeId: string }, context: any) => {
         const userId = context.user.id;

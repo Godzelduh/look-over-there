@@ -13,7 +13,7 @@ import TestPage from './pages/test.jsx'
 import GPSLocation   from "./components/GPS.tsx";
 import NearbySearch from './pages/nearbySearch.jsx'
 import NearbyTest from "./pages/nearbytest.tsx";
-
+import Explore from "./pages/Explore.tsx";
 import './Styles/index.css'
 
 
@@ -34,10 +34,6 @@ const router = createBrowserRouter([
       {
         path: '/Profile',
         element: <Profile />
-      },
-      {
-        path: '/AboutUs',
-        element: <AboutUs />
       },
       {
         path: '/login',
@@ -61,7 +57,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/nearbyTest',
-        element: <NearbyTest />
+        element: <NearbyTest/>
+      },
+      {
+        path: '/explore',
+        element: <Explore />
 
       }
     ]

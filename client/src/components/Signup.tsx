@@ -132,7 +132,6 @@ const Signup = () => {
       {showAlert && (
       <div style={{ color: 'red' }}>
         Something went wrong with your signup!
-        <button onClick={() => setShowAlert(false)}>Close</button>
       </div>
       )}
     </form>

@@ -48,6 +48,14 @@ const Navbar = () => {
                             </li>
                             <li className="nav-item">
                                 <Link
+                                    to="/Explore"
+                                    className={currentPage === '/Explore' ? 'nav-link active' : 'nav-link'}
+                                >
+                                    Explore
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link
                                     to="/logout"
                                     onClick={handleLogout}
                                     className={currentPage === '/logout' ? 'nav-link active' : 'nav-link'}
@@ -56,8 +64,9 @@ const Navbar = () => {
                                 </Link>
                             </li>
                         </>
+                        
                     ) : (
-                        <div className='nav'>
+                        <>
                             <li className="nav-item">
                                 <Link
                                     to="/login"
@@ -74,7 +83,7 @@ const Navbar = () => {
                                     Sign Up
                                 </Link>
                             </li>
-                        </div>
+                        </>
                     )}
                 </ul>
             </nav>
