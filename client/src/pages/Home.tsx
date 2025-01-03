@@ -9,6 +9,7 @@ import ChallengeCard from '../components/ChallengeCard';
 import { useMutation } from '@apollo/client';
 import { CREATE_CHALLENGE, ADD_CHALLENGES_TO_HUNT } from '../utils/mutations';
 import Auth from '../utils/auth';
+import '../Styles/App.css';
 
 //import { text } from 'express';
 
@@ -45,12 +46,14 @@ const Home = () => {
   });*/
   //console.log(textQuery)
   //console.log(data)
+  
   const places = data?.textSearch;
   console.log("Places",places)
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setTextQuery(event.target.value);
 
   };
+  
 
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -212,7 +215,7 @@ const Home = () => {
         </button>
         </div>
       )}
-    </div>
+  </div>
   );
 };
 

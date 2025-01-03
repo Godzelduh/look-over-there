@@ -59,7 +59,7 @@ const Login = () => {
       <img src={LookoverthereLogo1} alt="LookHere!!!" className="nav-logo" />
     </Link>
     <h2>Welcome Back!</h2>
-        <p className="welcome-message">Log in to continue your adventure!</p>
+        <p className="welcome-message">It's time to continue your adventure!</p>
         <img src={LoginGif} alt="Login GIF" className="login-gif" />
       <form onSubmit={handleFormSubmit}>
 
@@ -101,8 +101,7 @@ const Login = () => {
       
       {showAlert && (
       <div style={{ color: 'red' }}>
-        Something went wrong with your signup!
-        <button onClick={() => setShowAlert(false)}>Close</button>
+        Something went wrong with your login! Try again!
       </div>
         )}
     </>

@@ -238,26 +238,22 @@ const resolvers = {
                 throw new Error("Invalid user_id. Must be a valid ObjectId.");
               }
             
-              // Validate and convert challenge_id for all challenges
-              const validatedChallenges = challenges.map((challenge: any) => {
-                if (!mongoose.Types.ObjectId.isValid(challenge.challenge_id)) {
-                  throw new Error(`Invalid challenge_id: ${challenge.challenge_id}. Must be a valid ObjectId.`);
-                }
-            
-                return {
-                  ...challenge,
-                  challenge_id: new mongoose.Types.ObjectId(challenge.challenge_id), // Convert to ObjectId
-                };
-              });
+              // Generate challenge_id if not provided
+        const validatedChallenges = challenges.map((challenge: any) => ({
+          ...challenge,
+          challenge_id: mongoose.Types.ObjectId.isValid(challenge.challenge_id)
+            ? challenge.challenge_id
+            : new mongoose.Types.ObjectId(), // Generate new ObjectId if not valid
+        }));
             
               // Check if the hunt already exists for the user
-              let hunt = await Hunt.findOne({ user_id: new mongoose.Types.ObjectId(user_id) });
+              let hunt = await Hunt.findOne({ user_id});
             
               // Handle the case where `hunt` is null
               if (!hunt) {
                 console.log("No hunt found for the user. Creating a new one.");
                 hunt = new Hunt({ 
-                  user_id: new mongoose.Types.ObjectId(user_id), 
+                  user_id, 
                   challenges: validatedChallenges 
                 });
               } else {

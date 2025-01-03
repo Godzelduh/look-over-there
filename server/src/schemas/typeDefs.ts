@@ -68,7 +68,7 @@ completion_time: String
 # HuntChallenge type  new added in final folder on jan 2
 # HuntChallengeInput type (for challenges in HuntInput)
 input HuntChallengeInput {
-  id: ID!
+  challenge_id: ID
   name: String
   location: LocationInput
   address: String
