@@ -6,10 +6,8 @@ import { useLazyQuery } from '@apollo/client';
 import { useState } from 'react';
 import CarouselImageReel from '../components/CarouselImageReel';
 import ChallengeCard from '../components/ChallengeCard';
-
 import { useMutation } from '@apollo/client';
-import { CREATE_CHALLENGE } from '../utils/mutations';
-// import { GET_ME } from '../utils/queries';
+import { CREATE_CHALLENGE, ADD_CHALLENGES_TO_HUNT } from '../utils/mutations';
 import Auth from '../utils/auth';
 import '../Styles/App.css';
 
@@ -37,6 +35,9 @@ const Home = () => {
 
   const [loadPlaces, { called, loading, data }] = useLazyQuery(GET_PLACES)
   const [createChallengeMutation] = useMutation(CREATE_CHALLENGE)
+  const [createHunt] = useMutation(ADD_CHALLENGES_TO_HUNT)
+  const user_id = localStorage.getItem('userId');
+
   /*, {
   refetchQueries: [
     GET_CHALLENGES,
@@ -73,7 +74,7 @@ const Home = () => {
       console.error('No places available to create challenges.');
       return;
     }
-  
+    let challenges = [];
     try {
       for (const place of places) {
         // Validate the place object to ensure required fields exist
@@ -115,6 +116,15 @@ const Home = () => {
           // Handle successful challenge creation
           if (data) {
             console.log('Challenge created successfully:', data);
+            const response = data.createChallenge;
+            const {__typename, task, location: { __typename: locTypename, ...location }, ...input} = response;
+            const challenge = {
+              ...input,
+              location: {
+                ...location
+              }
+            }
+            challenges.push(challenge)
           } else {
             console.error('No data returned from mutation for place:', place);
           }
@@ -123,12 +133,30 @@ const Home = () => {
           console.error('Error saving challenge for place:', place, mutationError);
         }
       }
-  
-      alert('All challenges processed!');
+      //console.log(`Challenges: ${challenges} UserId: ${userId}`)
+      //alert('All challenges processed!');
+      console.log(challenges)
+      
+      try {
+
+        const { data } = await createHunt({
+          variables: { input: { user_id, challenges } },
+        });
+
+        // Handle successful challenge creation
+        if (data) {
+          console.log('Hunt created successfully:', data);
+        } else {
+          console.error('No data returned from mutation for creating Hunt');
+        }
+      } catch (mutationError) {
+          // Handle mutation-specific errors
+          console.error('Error creating hunt for:', user_id, mutationError);
+      }
     } catch (err) {
       // Handle unexpected errors
       console.error('Unexpected error while creating challenges:', err);
-      alert('Failed to save challenges.');
+      alert('Failed to save hunt.');
     }
   }
 
