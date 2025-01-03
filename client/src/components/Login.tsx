@@ -100,8 +100,7 @@ const Login = () => {
       
       {showAlert && (
       <div style={{ color: 'red' }}>
-        Something went wrong with your signup!
-        <button onClick={() => setShowAlert(false)}>Close</button>
+        Something went wrong with your login! Try again!
       </div>
         )}
     </>
