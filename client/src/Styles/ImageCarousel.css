@@ -1,34 +1,13 @@
-@keyframes snap {
-  96% {
-    scroll-snap-align: center;
-  }
-
-  97% {
-    scroll-snap-align: none;
-  }
-
-  99% {
-    scroll-snap-align: none;
-  }
-
-  100% {
-    scroll-snap-align: center;
-  }
-}
-
 @keyframes tonext {
   75% {
     left: 0;
   }
-
   95% {
     left: 100%;
   }
-
   98% {
     left: 100%;
   }
-
   99% {
     left: 0;
   }
@@ -38,82 +17,60 @@
   75% {
     left: 0;
   }
-
   95% {
     left: -300%;
   }
-
   98% {
     left: -300%;
   }
-
   99% {
     left: 0;
   }
 }
 
-@media (hover: hover) {
-  .image-reel__snapper {
-    animation-name: tonext, snap;
-    animation-timing-function: ease;
-    animation-duration: 4s;
-    animation-iteration-count: infinite;
+@keyframes snap {
+  96% {
+    scroll-snap-align: center;
   }
-
-  .image-reel__slide:last-child .image-reel__snapper {
-    animation-name: tostart, snap;
+  97% {
+    scroll-snap-align: none;
   }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .image-reel__snapper {
-    animation-name: none;
+  99% {
+    scroll-snap-align: none;
+  }
+  100% {
+    scroll-snap-align: center;
   }
 }
-
-* {
-  box-sizing: border-box;
-  scrollbar-color: transparent transparent;
-  /* thumb and track color */
-  scrollbar-width: 0px;
-}
-
-*::-webkit-scrollbar {
-  width: 0;
-}
-
-*::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-*::-webkit-scrollbar-thumb {
-  background: transparent;
-  border: none;
-}
-
-* {
-  -ms-overflow-style: none;
-}
-
-.image-reel:hover .image-reel__snapper,
-.image-reel:focus-within .image-reel__snapper {
-  animation-name: none;
-}
-
-.image-reel::before,
-.image-reel__prev {
-    left: -1rem;
-    display: none;
-}
-
-.image-reel::after,
-.image-reel__next {
-    right: -1rem;
-    display: none;
-}
-
 .image-reel {
+  position: relative;
+  overflow: hidden;
+  width:75%;
+  margin-left: 12.5%;
   height: 50vh;
+}
+
+.image-reel__viewport {
+  display: flex;
+  transition: transform 0.5s ease; /* Smooth transition */
+  width: 100%; /* Full width */
+  animation: tonext 2s linear infinite;
+}
+
+.image-reel__slide {
+  min-width: 100%; /* Each slide takes full width */
+  height: 50%; /* Ensure slide takes full height */
+  display: flex; /* Center the image */
+  justify-content: center; /* Center the image horizontally */
+  align-items: center; /* Center the image vertically */
+}
+
+.image-style {
+  height: 50%; /* Full height of the slide */
+  width: 100%; /* Full width of the slide */
+  border-radius: 50px; /* Rounded corners */
+  object-fit: cover;
+
 }
 @media screen and (max-width: 450px) {
   .image-reel {

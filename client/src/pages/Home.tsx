@@ -6,11 +6,13 @@ import { useLazyQuery } from '@apollo/client';
 import { useState } from 'react';
 import CarouselImageReel from '../components/CarouselImageReel';
 import ChallengeCard from '../components/ChallengeCard';
-import { useMutation } from '@apollo/client';
-import { CREATE_CHALLENGE, ADD_CHALLENGES_TO_HUNT } from '../utils/mutations';
-import Auth from '../utils/auth';
-import '../Styles/App.css';
 
+import { useMutation } from '@apollo/client';
+// import { CREATE_CHALLENGE } from '../utils/mutations';
+// import { GET_ME } from '../utils/queries';
+import Auth from '../utils/auth';
+// new import for challenge creation
+import { ADD_CHALLENGES_TO_HUNT } from '../utils/mutations';
 //import { text } from 'express';
 
 const styles: { container: CSSProperties; image: CSSProperties } = {
@@ -34,9 +36,11 @@ const Home = () => {
   const [searchType, setSearchType] = useState<string>('Tourist Attractions');
 
   const [loadPlaces, { called, loading, data }] = useLazyQuery(GET_PLACES)
-  const [createChallengeMutation] = useMutation(CREATE_CHALLENGE)
-  const [createHunt] = useMutation(ADD_CHALLENGES_TO_HUNT)
-  const user_id = localStorage.getItem('userId');
+  // const [createChallengeMutation] = useMutation(CREATE_CHALLENGE)
+
+  // new based on Hunt
+  // Add useMutation for adding challenges to Hunt
+  const [addChallengesToHunt] = useMutation(ADD_CHALLENGES_TO_HUNT);
 
   /*, {
   refetchQueries: [
@@ -46,14 +50,12 @@ const Home = () => {
   });*/
   //console.log(textQuery)
   //console.log(data)
-  
   const places = data?.textSearch;
   console.log("Places",places)
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setTextQuery(event.target.value);
 
   };
-  
 
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -64,6 +66,76 @@ const Home = () => {
     });
   }
 
+  // const handleCreateChallenge = async () => {
+  //   if (!Auth.loggedIn()) {
+  //     alert('You need to be logged in to save a challenge!');
+  //     return;
+  //   }
+  
+  //   if (!places || places.length === 0) {
+  //     console.error('No places available to create challenges.');
+  //     return;
+  //   }
+  
+  //   try {
+  //     for (const place of places) {
+  //       // Validate the place object to ensure required fields exist
+  //       if (!place || !place.geometry || !place.geometry.location) {
+  //         console.error('Invalid place object:', place);
+  //         continue; // Skip invalid places
+  //       }
+  
+  //       const location = {
+  //         type: "Point", // Required by schema
+  //         coordinates: [
+  //           place.geometry.location.lng, // Longitude
+  //           place.geometry.location.lat, // Latitude
+  //         ],
+  //         name: place.name || "Unnamed Location", // Fallback name if missing
+  //       };
+  
+  //       const image_url = place.photos?.[0] || 'default-placeholder.jpg'; // Fallback image
+  //       const type = "Tourist Attraction"; // Static type
+  //       const name = place.name || "Unnamed Challenge"; // Fallback name
+  //       const task = `Visit ${place.name}`; 
+  //       const address = place.formatted_address || "Address not available"; // Fallback address
+  //       // Log the challenge input for debugging
+  //       console.log('Creating Challenge:', {
+  //         type,
+  //         location,
+  //         image_url,
+  //         name,
+  //         address,
+  //         task
+  //       });
+  
+  //       try {
+  //         // Execute the mutation
+  //         const { data } = await createChallengeMutation({
+  //           variables: { input: { type, location, image_url, name, address, task } },
+  //         });
+  
+  //         // Handle successful challenge creation
+  //         if (data) {
+  //           console.log('Challenge created successfully:', data);
+  //         } else {
+  //           console.error('No data returned from mutation for place:', place);
+  //         }
+  //       } catch (mutationError) {
+  //         // Handle mutation-specific errors
+  //         console.error('Error saving challenge for place:', place, mutationError);
+  //       }
+  //     }
+  
+  //     alert('All challenges processed!');
+  //   } catch (err) {
+  //     // Handle unexpected errors
+  //     console.error('Unexpected error while creating challenges:', err);
+  //     alert('Failed to save challenges.');
+  //   }
+  // }
+
+  // new based on Hunt
   const handleCreateChallenge = async () => {
     if (!Auth.loggedIn()) {
       alert('You need to be logged in to save a challenge!');
@@ -74,91 +146,48 @@ const Home = () => {
       console.error('No places available to create challenges.');
       return;
     }
-    let challenges = [];
+  
     try {
-      for (const place of places) {
-        // Validate the place object to ensure required fields exist
+      const userId = Auth.getProfile().data._id;
+  
+      const challenges = places.map((place: any) => {
         if (!place || !place.geometry || !place.geometry.location) {
           console.error('Invalid place object:', place);
-          continue; // Skip invalid places
+          return null; // Skip invalid places
         }
   
-        const location = {
-          type: "Point", // Required by schema
-          coordinates: [
-            place.geometry.location.lng, // Longitude
-            place.geometry.location.lat, // Latitude
-          ],
-          name: place.name || "Unnamed Location", // Fallback name if missing
+        return {
+          name: place.name || "Unnamed Challenge",
+          location: {
+            type: "Point",
+            coordinates: [
+              place.geometry.location.lng,
+              place.geometry.location.lat,
+            ],
+            name: place.name || "Unnamed Location",
+          },
+          address: place.formatted_address || "Address not available",
+          image_url: place.photos?.[0] || 'default-placeholder.jpg',
+          status: "pending",
+          completion_time: null,
         };
+      }).filter((challenge: any) => challenge !== null);
   
-        const image_url = place.photos?.[0] || 'default-placeholder.jpg'; // Fallback image
-        const type = "Tourist Attraction"; // Static type
-        const name = place.name || "Unnamed Challenge"; // Fallback name
-        const task = `Visit ${place.name}`; 
-        const address = place.formatted_address || "Address not available"; // Fallback address
-        // Log the challenge input for debugging
-        console.log('Creating Challenge:', {
-          type,
-          location,
-          image_url,
-          name,
-          address,
-          task
-        });
+      const { data } = await addChallengesToHunt({
+        variables: { input: { user_id: userId, challenges } },
+      });
   
-        try {
-          // Execute the mutation
-          const { data } = await createChallengeMutation({
-            variables: { input: { type, location, image_url, name, address, task } },
-          });
-  
-          // Handle successful challenge creation
-          if (data) {
-            console.log('Challenge created successfully:', data);
-            const response = data.createChallenge;
-            const {__typename, task, location: { __typename: locTypename, ...location }, ...input} = response;
-            const challenge = {
-              ...input,
-              location: {
-                ...location
-              }
-            }
-            challenges.push(challenge)
-          } else {
-            console.error('No data returned from mutation for place:', place);
-          }
-        } catch (mutationError) {
-          // Handle mutation-specific errors
-          console.error('Error saving challenge for place:', place, mutationError);
-        }
-      }
-      //console.log(`Challenges: ${challenges} UserId: ${userId}`)
-      //alert('All challenges processed!');
-      console.log(challenges)
-      
-      try {
-
-        const { data } = await createHunt({
-          variables: { input: { user_id, challenges } },
-        });
-
-        // Handle successful challenge creation
-        if (data) {
-          console.log('Hunt created successfully:', data);
-        } else {
-          console.error('No data returned from mutation for creating Hunt');
-        }
-      } catch (mutationError) {
-          // Handle mutation-specific errors
-          console.error('Error creating hunt for:', user_id, mutationError);
+      if (data) {
+        console.log('Challenges successfully added to Hunt:', data);
+        alert('Challenges added to your Hunt!');
+      } else {
+        console.error('No data returned from mutation.');
       }
     } catch (err) {
-      // Handle unexpected errors
-      console.error('Unexpected error while creating challenges:', err);
-      alert('Failed to save hunt.');
+      console.error('Unexpected error while adding challenges to Hunt:', err);
+      alert('Failed to save challenges to Hunt.');
     }
-  }
+  };
 
   if (called && loading) {
     return <div>Loading...</div>;
@@ -215,7 +244,7 @@ const Home = () => {
         </button>
         </div>
       )}
-  </div>
+    </div>
   );
 };
 
