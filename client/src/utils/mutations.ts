@@ -92,3 +92,14 @@ export const ADD_CHALLENGES_TO_HUNT = gql`
     }
   }
 `
+
+export const UPDATE_HUNT_PROGRESS = gql`
+  mutation updateHuntProgress($userId: ID!, $challengeId: ID!, $status: String!) {
+    updateHuntProgress(userId: $userId, challengeId: $challengeId, status: $status) {
+      challenge_id
+      name
+      status
+      completion_time
+    }
+  }
+`;
