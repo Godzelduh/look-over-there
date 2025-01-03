@@ -166,7 +166,7 @@ const Profile: React.FC = () => {
                 }}
               />
               <button
-                onClick={() => handleCompleteChallenge(challenge.id)}
+                onClick={() => handleCompleteChallenge(challenge.challenge_id)}
                 disabled={!isNear}
                 style={{
                   width: '100%',
