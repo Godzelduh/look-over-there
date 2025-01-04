@@ -115,7 +115,7 @@ const Profile: React.FC = () => {
         <img src={clouds} alt="clouds" style={styles.image} />
       </div> {/* Add the clouds div */}
       {/* Other content can go here */}
-      <h1>Your Challenges </h1>
+      <h2>Your Challenges </h2>
       <div style={styles.list}>
         {challenges.map((challenge: any) => {
           const distance = userLocation
@@ -127,7 +127,7 @@ const Profile: React.FC = () => {
               )
             : null;
 
-          const isNear = distance !== null && distance <= 500;
+          const isNear = distance !== null && distance <= 5500;
 
           return (
             <div key={challenge.id} style={styles.card}>

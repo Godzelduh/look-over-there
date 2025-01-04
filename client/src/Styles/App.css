@@ -153,9 +153,9 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('../assets/clouds1.png') repeat-x; /* Use your cloud image */
+  background: url('../assets/clouds.png') repeat-x; /* Use your cloud image */
   animation: moveClouds 60s linear infinite;
-  z-index: -1; /* Ensure clouds are behind other content */
+  z-index: 1; /* Ensure clouds are behind other content */
 }
 
 @keyframes moveClouds {
