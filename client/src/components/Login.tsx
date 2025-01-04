@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { ChangeEvent, FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
@@ -12,6 +13,8 @@ import '../Styles/login.css'
 
 const Login = () => {
   const [userFormData, setUserFormData] = useState<User>({ username: '', email: '', password: '', savedLocations: [] });
+  const navigate = useNavigate();
+
   
   // set state for alert
   const [showAlert, setShowAlert] = useState(false);
@@ -36,8 +39,9 @@ const Login = () => {
         throw new Error('something went wrong!');
       }
 
-      const { token } = await data.login;
+      const { token, user } = await data.login;
       Auth.login(token);
+      localStorage.setItem('userId', user.id);
     } catch (err) {
       console.error(err);
       setShowAlert(true);
@@ -50,6 +54,11 @@ const Login = () => {
       savedLocations: [],
     });
   };
+
+  const navigateToSignup = () => {
+    navigate('/signup')
+  }
+
 
   return (
     
@@ -97,6 +106,9 @@ const Login = () => {
           Submit
         </button>
       </form>
+      <div className='navigate-to-signup'>
+        <h3>Not signed up?  </h3> <span onClick={navigateToSignup}>Click here</span>
+      </div>
       
       {showAlert && (
       <div style={{ color: 'red' }}>
