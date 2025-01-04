@@ -49,11 +49,11 @@ const Profile: React.FC = () => {
   // const { loading, error, data } = useQuery(GET_CHALLENGES);
 
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
+  const [verificationButton, setVerificationButton] = useState("Verify Location");
   // const [fetchChallengesNear, { loading, error, data }] = useLazyQuery(GET_CHALLENGES_NEAR);
   // const [markChallengeComplete] = useMutation(MARK_CHALLENGE_COMPLETE);
   const [fetchHuntsByUser, { loading, error, data }] = useLazyQuery(GET_HUNTS_BY_USER);
   const [updateHuntProgress] = useMutation(UPDATE_HUNT_PROGRESS);
-
     // Fetch user's GPS location
     useEffect(() => {
       const userId = Auth.getProfile()?.data?._id;
@@ -111,15 +111,18 @@ const Profile: React.FC = () => {
 
     const handleCompleteChallenge = async (challengeId: string) => {
       try {
-        const userId = Auth.getProfile()?.data?._id;
-        console.log("User ID: ", userId);
+        //const userId = Auth.getProfile()?.data?._id;
+        //console.log("User ID: ", userId);
+        const huntId = hunt.id;
         // const { data } = await markChallengeComplete({
         //    variables: { id: challengeId },
            
         //  });
         const { data } = await updateHuntProgress({
-          variables: { userId, challengeId, status : 'completed'},
+          variables: { huntId, challengeId, status : 'completed'},
         });
+        setVerificationButton("Complete");
+        console.log(verificationButton)
         alert(`Challenge marked as completed!`);
         console.log('Challenge completion response:', data);
       } catch (err) {
@@ -146,7 +149,7 @@ const Profile: React.FC = () => {
               )
             : null;
 
-          const isNear = distance !== null && distance <= 500;
+          const isNear = distance !== null && distance <= 5000;
 
           return (
             <div key={challenge.id} style={styles.card}>
@@ -176,7 +179,7 @@ const Profile: React.FC = () => {
                   cursor: isNear ? 'pointer' : 'not-allowed',
                 }}
               >
-                {isNear ? 'Completed' : 'Not Near'}
+                {isNear ? verificationButton : 'Not Near'}
               </button>
             </div>
           );
