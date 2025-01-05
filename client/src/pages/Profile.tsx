@@ -3,11 +3,14 @@ import '../Styles/profile.css'; // Import the CSS file
 import clouds from '../assets/clouds.png'; // Import the image
 // import { useQuery } from '@apollo/client';
 // import { GET_CHALLENGES } from '../utils/queries';
-import { GET_CHALLENGES_NEAR } from '../utils/queries';
+// import { GET_CHALLENGES_NEAR } from '../utils/queries';
+import { GET_HUNTS_BY_USER } from '../utils/queries'; 
 import { useLazyQuery } from '@apollo/client';
 import { haversineDistance } from '../utils/locver';
-import { MARK_CHALLENGE_COMPLETE } from '../utils/mutations';
+// import { MARK_CHALLENGE_COMPLETE } from '../utils/mutations';
+import { UPDATE_HUNT_PROGRESS } from '../utils/mutations'; 
 import { useMutation } from '@apollo/client';
+import Auth from '../utils/auth'; // Import the Auth module
 
 const Profile: React.FC = () => {
   const styles: { container: CSSProperties, image: CSSProperties, list: CSSProperties, card: CSSProperties } = {
@@ -46,33 +49,40 @@ const Profile: React.FC = () => {
   // const { loading, error, data } = useQuery(GET_CHALLENGES);
 
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
-  const [fetchChallengesNear, { loading, error, data }] = useLazyQuery(GET_CHALLENGES_NEAR);
-  const [markChallengeComplete] = useMutation(MARK_CHALLENGE_COMPLETE);
-
+  const [verificationButton, setVerificationButton] = useState("Verify Location");
+  // const [fetchChallengesNear, { loading, error, data }] = useLazyQuery(GET_CHALLENGES_NEAR);
+  // const [markChallengeComplete] = useMutation(MARK_CHALLENGE_COMPLETE);
+  const [fetchHuntsByUser, { loading, error, data }] = useLazyQuery(GET_HUNTS_BY_USER);
+  const [updateHuntProgress] = useMutation(UPDATE_HUNT_PROGRESS);
     // Fetch user's GPS location
     useEffect(() => {
+      const userId = Auth.getProfile()?.data?._id;
+      console.log("User ID: inside useeffect ", userId);
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
           const userLocation = { lat: latitude, lng: longitude };
           setUserLocation(userLocation);
     
-          console.log("Sending variables to GET_CHALLENGES_NEAR:", {
-            location: {
-              type: 'Point',
-              coordinates: [longitude, latitude],
-            },
-            maxDistance: 5000,
-          });
+          // console.log("Sending variables to GET_CHALLENGES_NEAR:", {
+          //   location: {
+          //     type: 'Point',
+          //     coordinates: [longitude, latitude],
+          //   },
+          //   maxDistance: 5000,
+          // });
     
-          fetchChallengesNear({
-            variables: {
-              location: {
-                type: 'Point',
-                coordinates: [longitude, latitude],
-              },
-              maxDistance: 5000,
-            },
+          // fetchChallengesNear({
+          //   variables: {
+          //     location: {
+          //       type: 'Point',
+          //       coordinates: [longitude, latitude],
+          //     },
+          //     maxDistance: 5000,
+          //   },
+          // });
+          fetchHuntsByUser({
+            variables: { userId },
           });
         },
         (error) => {
@@ -80,7 +90,7 @@ const Profile: React.FC = () => {
           alert('Failed to fetch location. Please enable location services.');
         }
       );
-    }, [fetchChallengesNear]);
+    }, [fetchHuntsByUser]);
   
    console.log("User Location: ", userLocation); // Debug the user's location
     // Handle loading state
@@ -93,14 +103,26 @@ const Profile: React.FC = () => {
     // const challenges = data?.getChallenges || [];
   
      // Extract challenges from data
-     const challenges = data?.getChallengesNear || [];
-    console.log("Challenges before the return in Profile.tsx : ",challenges); // Debug the data to confirm its structure
-   const handleCompleteChallenge = async (challengeId: string) => {
+    //  const challenges = data?.getChallengesNear || [];
+    const hunt = data?.getHuntsByUser;
+    // console.log("Challenges before the return in Profile.tsx : ",challenges); // Debug the data to confirm its structure
+    console.log("Hunt before the return in Profile.tsx : ",hunt); // Debug the data to confirm its structure
+    const challenges = hunt?.challenges || [];
+
+    const handleCompleteChallenge = async (challengeId: string) => {
       try {
-        const { data } = await markChallengeComplete({
-           variables: { id: challengeId },
+        //const userId = Auth.getProfile()?.data?._id;
+        //console.log("User ID: ", userId);
+        const huntId = hunt.id;
+        // const { data } = await markChallengeComplete({
+        //    variables: { id: challengeId },
            
-         });
+        //  });
+        const { data } = await updateHuntProgress({
+          variables: { huntId, challengeId, status : 'completed'},
+        });
+        setVerificationButton("Complete");
+        console.log(verificationButton)
         alert(`Challenge marked as completed!`);
         console.log('Challenge completion response:', data);
       } catch (err) {
@@ -115,7 +137,7 @@ const Profile: React.FC = () => {
         <img src={clouds} alt="clouds" style={styles.image} />
       </div> {/* Add the clouds div */}
       {/* Other content can go here */}
-      <h1>Your Challenges </h1>
+      <h2>Your Challenges </h2>
       <div style={styles.list}>
         {challenges.map((challenge: any) => {
           const distance = userLocation
@@ -126,8 +148,7 @@ const Profile: React.FC = () => {
                 challenge.location.coordinates[0] // longitude
               )
             : null;
-
-          const isNear = distance !== null && distance <= 500;
+          const isNear = distance !== null && distance <= 5000;
 
           return (
             <div key={challenge.id} style={styles.card}>
@@ -147,17 +168,17 @@ const Profile: React.FC = () => {
                 }}
               />
               <button
-                onClick={() => handleCompleteChallenge(challenge.id)}
+                onClick={() => handleCompleteChallenge(challenge.challenge_id)}
                 disabled={!isNear}
                 style={{
                   width: '100%',
                   backgroundColor: isNear ? 'Green' : 'Red',
                   color: 'Black',
                   border: 'none',
-                  // cursor: isNear ? 'pointer' : 'not-allowed',
+                  cursor: isNear ? 'pointer' : 'not-allowed',
                 }}
               >
-                {isNear ? 'Completed' : 'Not Near'}
+                {isNear ? verificationButton : 'Not Near'}
               </button>
             </div>
           );
