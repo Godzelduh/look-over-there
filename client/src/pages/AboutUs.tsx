@@ -1,7 +1,7 @@
 import React from 'react';
 import { CSSProperties } from 'react';
 import travelingmap from '../assets/travelingmap.jpg';
-import TravelTopFiveChoices from '../assets/traveltopfivechoices.png';
+//import TravelTopFiveChoices from '../assets/traveltopfivechoices.png';
 
   const styles: { [key: string]: CSSProperties } = {
     container: {
@@ -89,9 +89,9 @@ import TravelTopFiveChoices from '../assets/traveltopfivechoices.png';
         <img src={travelingmap} alt="Travel" style={styles.image} />
       </div>
     
-          <div className="side-image-container">
+          {/* <div className="side-image-container">
           <img src={TravelTopFiveChoices} alt="Top 5 Choices" className="side-image" />
-          </div>
-          </div>
+          </div> */}
+          </div> 
   );
 export default AboutUs;

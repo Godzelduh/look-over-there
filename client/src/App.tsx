@@ -1,4 +1,5 @@
 import './Styles/App.css';
+import clouds from './assets/clouds.png';
 import {
   ApolloClient,
   InMemoryCache,
@@ -36,6 +37,13 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
+            <div className="clouds">
+        <img src={clouds} alt="clouds"/>
+      </div>
+      <div className="clouds clouds-1"></div>
+      <div className="clouds clouds-2"></div>
+      <div className="clouds clouds-3"></div>
+      <div className="app-content"></div>
       <Navbar />
       <Outlet />
     </ApolloProvider>

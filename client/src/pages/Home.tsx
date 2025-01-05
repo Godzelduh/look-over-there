@@ -1,4 +1,5 @@
 import { CSSProperties } from 'react';
+import clouds from '../assets/clouds.png';
 //import ScavengerHunting from '../assets/ScavengerHunting.avif'; // Import the image
 import type { ChangeEvent, FormEvent } from 'react';
 import { GET_PLACES } from '../utils/queries';
@@ -26,7 +27,7 @@ const styles: { container: CSSProperties; image: CSSProperties } = {
   },
   image: {
     display: 'block',
-    margin: '20px auto 0', // Center the image and add margin at the top
+
     maxWidth: '50%', // Ensure the image is responsive
     padding: '80px',
     height: 'auto',
@@ -206,9 +207,15 @@ const Home = () => {
     return <div>Loading...</div>;
   }
   return (
+    
     <div style={styles.container}>
+            <div className="clouds">
+        <img src={clouds} alt="clouds" />
+      </div>
       {/* Other content can go here*/}
+      <div>
       <CarouselImageReel/>
+    </div>
       <form onSubmit={handleFormSubmit}>
         
         <div className='search-bar'>

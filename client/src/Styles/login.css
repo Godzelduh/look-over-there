@@ -21,6 +21,7 @@ border-right: none;
   width: 100%;
   max-width: 350px; /* Adjust the max-width to make the GIF smaller */
   margin-bottom: 20px;
+  border-radius: 10%;
 }
 .form {
   display: flex;
@@ -75,7 +76,7 @@ h2 {
   margin-bottom: 50px;
   font-family: cursive, 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   color: transparent; /* Make the text color transparent */
-  background: url('../assets/travelnyc1.jpg') no-repeat center center; /* Use your background image */
+  background: url('../assets/travelsky.jpg') no-repeat center center; /* Use your background image */
   -webkit-background-clip: text; /* Clip the background to the text */
   background-clip: text; /* Clip the background to the text */
 }
@@ -85,4 +86,103 @@ h2 {
   color: #98bdce;
   animation: bounce 2s infinite; /* Add bounce animation */
   font-family: 'Comic Sans MS', cursive, sans-serif; /* Change the font style */
+}
+
+.signup-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signup-image {
+  width: 150px; /* Adjust as needed */
+  height: auto;
+  flex: 0 0 50%; /* Adjust as needed */
+  border-radius: 50%;
+}
+
+.signup-form {
+  margin: 0 20px; /* Adjust spacing as needed */
+  flex: 0 0 50%; /* Adjust as needed */
+}
+
+/* Media queries */
+
+@media screen and (max-width: 1024px) {
+  h2 {
+    font-size: 3rem;
+    margin-bottom: 40px;
+  }
+
+  .form {
+    padding: 10px; 
+  }
+
+  .signup-container {
+    flex-direction: column; 
+    align-items: center;
+  }
+
+  .signup-image {
+    width: 120px; 
+  }
+
+  .signup-form {
+    width: 80%; 
+    margin: 0 auto; 
+  }
+}
+
+@media screen and (max-width: 768px) {
+  h2 {
+    font-size: 2.5rem; 
+    margin-bottom: 30px;
+  }
+
+  .log-in {
+    width: 75%; 
+  }
+
+  button {
+    width: 50%; 
+    font-size: 0.9rem; 
+  }
+
+  .login-gif {
+    max-width: 250px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  h2 {
+    font-size: 2rem; 
+    margin-bottom: 20px;
+  }
+
+  .log-in {
+    width: 90%; 
+    height: 30px;
+  }
+
+  button {
+    width: 75%; 
+    height: 50px; 
+  }
+
+  .signup-container {
+    flex-direction: column;
+  }
+
+  .signup-image {
+    width: 100px; 
+    margin-bottom: 20px; 
+  }
+
+  .signup-form {
+    width: 90%;
+  }
+
+  .welcome-message {
+    font-size: 1.2rem;
+  }
 }
