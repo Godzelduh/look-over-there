@@ -1,39 +1,87 @@
-.image-reel__viewport {
-  overflow: hidden;
-  width: 100%;
-  height: 400px;
-  position: relative;
+@keyframes tonext {
+  75% {
+    left: 0;
+  }
+  95% {
+    left: 100%;
+  }
+  98% {
+    left: 100%;
+  }
+  99% {
+    left: 0;
+  }
 }
 
-.image-reel__inner {
-  display: flex;
-  width: calc(100% * 10); /* Adjust based on the number of images (5 original + 5 duplicated) */
-  animation: scroll 50s linear infinite; /* Adjust duration based on the number of images */
+@keyframes tostart {
+  75% {
+    left: 0;
+  }
+  95% {
+    left: -300%;
+  }
+  98% {
+    left: -300%;
+  }
+  99% {
+    left: 0;
+  }
 }
 
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
+@keyframes snap {
+  96% {
+    scroll-snap-align: center;
+  }
+  97% {
+    scroll-snap-align: none;
+  }
+  99% {
+    scroll-snap-align: none;
   }
   100% {
-    transform: translateX(-50%); /* Move by half the width to loop */
+    scroll-snap-align: center;
   }
+}
+.image-reel {
+  position: relative;
+  overflow: hidden;
+  width:75%;
+  margin-left: 12.5%;
+  height: 85vh;
+}
+
+.image-reel__viewport {
+  display: flex;
+  transition: transform 0.5s ease; /* Smooth transition */
+  width: 100%; /* Full width */
+  animation: tonext 2s linear infinite;
 }
 
 .image-reel__slide {
-  flex: 0 0 5%; /* Adjust based on the number of images (10 total) */
-  display: flex;
-  justify-content: center;
-
+  min-width: 100%; /* Each slide takes full width */
+  height: auto; /* Ensure slide takes full height */
+  display: flex; /* Center the image */
+  justify-content: center; /* Center the image horizontally */
+  align-items: center; /* Center the image vertically */
+  aspect-ratio: 25 / 12;
 }
+
+/* .image-reel_image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+} */
 
 .image-style {
-  width: 100%;
-  max-height: 65%;
-}
+  height: auto; /* Full height of the slide */
+  max-width: 125%; /* Full width of the slide */
+  max-height: 125%;
+  border-radius: 50px; /* Rounded corners */
+  object-fit: contain;
 
+}
 @media screen and (max-width: 450px) {
-  .image-reel__viewport {
+  .image-reel {
     height: 30vh;
   }
-}
+ }

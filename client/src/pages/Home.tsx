@@ -26,7 +26,7 @@ const styles: { container: CSSProperties; image: CSSProperties } = {
   },
   image: {
     display: 'block',
-
+    margin: '20px auto 0', // Center the image and add margin at the top
     maxWidth: '50%', // Ensure the image is responsive
     padding: '80px',
     height: 'auto',
@@ -205,9 +205,7 @@ const Home = () => {
         <img src={clouds} alt="clouds" />
       </div>
       {/* Other content can go here*/}
-      <div>
       <CarouselImageReel/>
-    </div>
       <form onSubmit={handleFormSubmit}>
         
         <div className='search-bar'>
