@@ -27,20 +27,20 @@ export const GET_CHALLENGES = gql`
   query GetChallenges {
     getChallenges {
      id
-     name
-     location {
+    name
+    location {
       type
       coordinates
       name
-     }
-     image_url
-     task
-     address
-     question
-     answer
-     photo_instruction
-     physical_task_info
-     verification_method
+    }
+    image_url
+    task
+    address
+    question
+    answer
+    photo_instruction
+    physical_task_info
+    verification_method
     }
   }
 `;
@@ -136,7 +136,6 @@ export const GET_HUNTS_BY_USER = gql`
 query getHuntsByUser($userId: ID!) {
   getHuntsByUser(userId: $userId) {
     id
-    city
     challenges {
       challenge_id
       name
