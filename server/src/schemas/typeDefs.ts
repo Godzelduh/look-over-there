@@ -28,7 +28,6 @@ type Hunt {
   id: ID! # The unique ID for the hunt
   user_id: ID! # The user associated with this hunt
   challenges: [HuntChallenge!]!
-  city: String!
 }
 
 type HuntChallenge {
@@ -115,7 +114,6 @@ name: String
 input HuntInput {
   user_id: ID!
   challenges: [HuntChallengeInput!]!
-  city: String!
 }
 
 input nearbyLocationInput { 
@@ -165,7 +163,7 @@ me: User
 getChallengesNear(location: LocationInput!, maxDistance: Float!): [Challenge]
 
 #new for getHuntsByUser - in final folder on jan 2
-getHuntsByUser(userId: ID!): [Hunt]
+getHuntsByUser(userId: ID!): Hunt
 #new for getAllHunts - in final folder on jan 2
 getAllHunts: [Hunt]
 

@@ -40,9 +40,9 @@ const Login = () => {
         throw new Error('something went wrong!');
       }
 
-      const { token } = await data.login;
+      const { token, user } = await data.login;
       Auth.login(token);
-      //localStorage.setItem('userId', user.id);
+      localStorage.setItem('userId', user.id);
     } catch (err) {
       console.error(err);
       setShowAlert(true);
