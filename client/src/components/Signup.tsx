@@ -70,70 +70,78 @@ const Signup = () => {
   };
 
   return (
-      <>
-          <Link to="/">
-              <img src={LookoverthereLogo1} alt="LookHere!!!" className="nav-logo"/>
-          </Link>
-          {/* This is needed for the validation functionality above */}
-          <h2>Sign up for your account!</h2>
-          <div className="clouds">
-              <img src={clouds} alt="clouds"/>
-          </div>
-          <div className="signup-container">
-              <img src={signuppisa} alt="Signup" className="signup-image left"/>
-              <form onSubmit={handleFormSubmit} className="signup-form">
-                  <div className='form'>
-                      <label htmlFor='username'>Username</label>
-                      <input
-                          type='text'
-                          placeholder='Your username'
-                          name='username'
-                          onChange={handleInputChange}
-                          className="log-in"
-                          value={userFormData.username}
-                          required
-                      />
-                  </div>
-                  <div className='form'>
-                      <label htmlFor='email'>Email</label>
-                      <input
-                          type='email'
-                          placeholder='Your email address'
-                          name='email'
-                          onChange={handleInputChange}
-                          className="log-in"
-                          value={userFormData.email}
-                          required
-                      />
-                  </div>
-                  <div className='form'>
-                      <label htmlFor='password'>Password</label>
-                      <input
-                          type='password'
-                          placeholder='Your password'
-                          name='password'
-                          onChange={handleInputChange}
-                          className="log-in"
-                          value={userFormData.password}
-                          required
-                      />
-                  </div>
-                  <button
-                      disabled={!(userFormData.username && userFormData.email && userFormData.password)}
-                      type='submit'
-                      className="log-in"
-                  >
-                      Submit
-                  </button>
-                  {showAlert && (
-                      <div style={{color: 'red'}}>
-                          Something went wrong with your signup!
-                      </div>
-                  )}
-              </form>
-              <img src={signuppisa} alt="Signup" className="signup-image right"/>
-          </div>
-      </>
+    <>
+    <Link to="/">
+      <img src={LookoverthereLogo1} alt="LookHere!!!" className="nav-logo" />
+    </Link>
+     {/* This is needed for the validation functionality above */}
+     <h2>Sign up for your account!</h2>
+     <div className="clouds">
+        <img src={clouds} alt="clouds" />
+      </div>
+     <div className="image-container">
+        <img src={signuppisa} alt="Signup" className="signup-image left" />
+        <img src={signuppisa} alt="Signup" className="signup-image right" />
+      </div>
+     <form onSubmit={handleFormSubmit}>
+
+      <div className='form'>
+        <label htmlFor='username'>Username</label>
+        <div className="clouds">
+        <img src={clouds} alt="clouds" />
+      </div>
+        <input
+          type='text'
+          placeholder='Your username'
+          name='username'
+          onChange={handleInputChange}
+          className="log-in"
+          value={userFormData.username}
+          required
+        />
+      </div>
+      <div className='form'>
+        <label htmlFor='email'>Email</label>
+        <input
+          type='email'
+          placeholder='Your email address'
+          name='email'
+          onChange={handleInputChange}
+          className="log-in"
+          value={userFormData.email}
+          required
+        />
+        {/*userFormData.email === '' && <span style={{ color: 'red' }}>Email is required!</span>*/}
+      </div>
+
+      <div className='form'>
+        <label htmlFor='password'>Password</label>
+        <input
+          type='password'
+          placeholder='Your password'
+          name='password'
+          onChange={handleInputChange}
+          className="log-in"
+          value={userFormData.password}
+          required
+        />
+      </div>
+
+      <button
+        disabled={!(userFormData.username && userFormData.email && userFormData.password)}
+        type='submit'
+        className="log-in"
+      >
+        Submit
+      </button>
+      
+      {showAlert && (
+      <div style={{ color: 'red' }}>
+        Something went wrong with your signup!
+      </div>
+      )}
+    </form>
+    </>
   );
 };
 

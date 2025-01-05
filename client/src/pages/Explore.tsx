@@ -82,7 +82,7 @@ const Explore: React.FC = () => {
       <div className="clouds">
         <img src={clouds} alt="clouds" style={styles.image} />
       </div>
-            <h2>Explore Nearby Places</h2>
+            <h1>Explore Nearby Places</h1>
             <div className='search-bar'>
                 <label htmlFor='searchbar' className='search-label'></label>
                 <div className={'city-container'}>
