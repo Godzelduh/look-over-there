@@ -92,6 +92,6 @@ import travelingmap from '../assets/travelingmap.jpg';
           {/* <div className="side-image-container">
           <img src={TravelTopFiveChoices} alt="Top 5 Choices" className="side-image" />
           </div> */}
-          </div>
+          </div> 
   );
 export default AboutUs;

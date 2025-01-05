@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import clouds from '../assets/clouds.png';
 import { Link } from 'react-router-dom';
 import type { ChangeEvent, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -75,6 +76,9 @@ const Signup = () => {
     </Link>
      {/* This is needed for the validation functionality above */}
      <h2>Sign up for your account!</h2>
+     <div className="clouds">
+        <img src={clouds} alt="clouds" />
+      </div>
      <div className="image-container">
         <img src={signuppisa} alt="Signup" className="signup-image left" />
         <img src={signuppisa} alt="Signup" className="signup-image right" />
@@ -83,6 +87,9 @@ const Signup = () => {
 
       <div className='form'>
         <label htmlFor='username'>Username</label>
+        <div className="clouds">
+        <img src={clouds} alt="clouds" />
+      </div>
         <input
           type='text'
           placeholder='Your username'
@@ -93,7 +100,6 @@ const Signup = () => {
           required
         />
       </div>
-
       <div className='form'>
         <label htmlFor='email'>Email</label>
         <input

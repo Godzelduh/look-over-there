@@ -47,7 +47,7 @@
   overflow: hidden;
   width:75%;
   margin-left: 12.5%;
-  height: 65vh;
+  height: 85vh;
 }
 
 .image-reel__viewport {
@@ -66,12 +66,18 @@
   aspect-ratio: 25 / 12;
 }
 
+/* .image-reel_image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+} */
+
 .image-style {
   height: auto; /* Full height of the slide */
-  width: 100%; /* Full width of the slide */
-  max-height: 100%;
+  max-width: 125%; /* Full width of the slide */
+  max-height: 125%;
   border-radius: 50px; /* Rounded corners */
-  object-fit: cover;
+  object-fit: contain;
 
 }
 @media screen and (max-width: 450px) {

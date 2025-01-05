@@ -75,7 +75,7 @@ h2 {
   margin-bottom: 50px;
   font-family: cursive, 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   color: transparent; /* Make the text color transparent */
-  background: url('../assets/travelnyc1.jpg') no-repeat center center; /* Use your background image */
+  background: url('../assets/travelsky.jpg') no-repeat center center; /* Use your background image */
   -webkit-background-clip: text; /* Clip the background to the text */
   background-clip: text; /* Clip the background to the text */
 }
