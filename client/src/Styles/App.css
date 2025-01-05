@@ -215,3 +215,113 @@ body {
   border-radius: 8px;
   background-color: #fff;
 } */
+
+/* Media Queries */
+@media (max-width: 1200px) {
+  #root {
+    padding: 1rem;
+  }
+
+  .logo {
+    height: 5em;
+  }
+
+  .nav {
+    padding: 15px 20px;
+  }
+
+  .nav-link {
+    font-size: 1.2em;
+    padding: 8px 16px;
+  }
+
+  .form-section {
+    width: 400px;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 992px) {
+  .nav {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .nav-logo {
+    height: 65px;
+    top: 5px;
+    left: 5px;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .form-section {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .logo {
+    height: 4em;
+  }
+
+  .nav {
+    padding: 5px 10px;
+  }
+
+  .nav-link {
+    font-size: 1em;
+    padding: 6px 12px;
+  }
+
+  .form-section {
+    padding: 15px;
+  }
+
+  .signup-image {
+    width: 40vw;
+  }
+}
+
+@media (max-width: 576px) {
+  .nav-logo {
+    height: 50px;
+  }
+
+  .nav-link {
+    font-size: 0.9em;
+    padding: 5px 10px;
+  }
+
+  .form-section {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .signup-image {
+    width: 50vw;
+  }
+}
+
+@media (max-width: 450px) {
+  .logo {
+    height: 3em;
+  }
+
+  .nav-link {
+    font-size: 0.8em;
+  }
+
+  .form-section {
+    padding: 8px;
+  }
+
+  .signup-image {
+    width: 60vw;
+  }
+}
+
