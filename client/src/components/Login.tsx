@@ -1,8 +1,6 @@
 import { useState } from 'react';
-import clouds from '../assets/clouds.png';
 import { Link } from 'react-router-dom';
 import type { ChangeEvent, FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
@@ -14,8 +12,6 @@ import '../Styles/login.css'
 
 const Login = () => {
   const [userFormData, setUserFormData] = useState<User>({ username: '', email: '', password: '', savedLocations: [] });
-  const navigate = useNavigate();
-
   
   // set state for alert
   const [showAlert, setShowAlert] = useState(false);
@@ -56,17 +52,9 @@ const Login = () => {
     });
   };
 
-  const navigateToSignup = () => {
-    navigate('/signup')
-  }
-
-
   return (
     
     <>
-          <div className="clouds">
-        <img src={clouds} alt="clouds" />
-      </div>
     <Link to="/">
       <img src={LookoverthereLogo1} alt="LookHere!!!" className="nav-logo" />
     </Link>
@@ -74,9 +62,7 @@ const Login = () => {
         <p className="welcome-message">It's time to continue your adventure!</p>
         <img src={LoginGif} alt="Login GIF" className="login-gif" />
       <form onSubmit={handleFormSubmit}>
-      <div className="clouds">
-        <img src={clouds} alt="clouds" />
-      </div>
+
          <div className='form'>
           <label htmlFor='email'>Email</label>
           <input
@@ -112,9 +98,6 @@ const Login = () => {
           Submit
         </button>
       </form>
-      <div className='navigate-to-signup'>
-        <h3>Not signed up?  </h3> <span onClick={navigateToSignup}>Click here</span>
-      </div>
       
       {showAlert && (
       <div style={{ color: 'red' }}>

@@ -130,24 +130,3 @@ export const GET_CHALLENGES_NEAR = gql`
     }
   }
 `;
-
-// getting hunts by user - added to final as new on jan 2
-export const GET_HUNTS_BY_USER = gql`
-query getHuntsByUser($userId: ID!) {
-  getHuntsByUser(userId: $userId) {
-    id
-    challenges {
-      challenge_id
-      name
-      location {
-        type
-        coordinates
-      }
-      address
-      image_url
-      status
-      completion_time
-    }
-  }
-}
-`;
