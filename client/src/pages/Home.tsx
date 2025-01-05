@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import CarouselImageReel from '../components/CarouselImageReel';
 import ChallengeCard from '../components/ChallengeCard';
+import { GET_HUNTS_BY_USER } from '../utils/queries';
 
 import { useMutation } from '@apollo/client';
 // import { CREATE_CHALLENGE } from '../utils/mutations';
@@ -14,7 +15,7 @@ import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 // new import for challenge creation
 import { ADD_CHALLENGES_TO_HUNT } from '../utils/mutations';
-//import { text } from 'express';
+
 
 const styles: { container: CSSProperties; image: CSSProperties } = {
   container: {
@@ -43,7 +44,9 @@ const Home = () => {
 
   // new based on Hunt
   // Add useMutation for adding challenges to Hunt
-  const [addChallengesToHunt] = useMutation(ADD_CHALLENGES_TO_HUNT);
+  const [addChallengesToHunt] = useMutation(ADD_CHALLENGES_TO_HUNT)
+
+
 
   /*, {
   refetchQueries: [
@@ -140,6 +143,7 @@ const Home = () => {
 
   // new based on Hunt
   const handleCreateChallenge = async () => {
+    
     if (!Auth.loggedIn()) {
       alert('You need to be logged in to save a challenge!');
       navigate('/login')
@@ -153,7 +157,7 @@ const Home = () => {
   
     try {
       const userId = Auth.getProfile().data._id;
-  
+      const city = textQuery;
       const challenges = places.map((place: any) => {
         if (!place || !place.geometry || !place.geometry.location) {
           console.error('Invalid place object:', place);
@@ -178,7 +182,11 @@ const Home = () => {
       }).filter((challenge: any) => challenge !== null);
   
       const { data } = await addChallengesToHunt({
-        variables: { input: { user_id: userId, challenges } },
+        variables: { input: { user_id: userId, challenges, city } },
+        refetchQueries: [{
+          query: GET_HUNTS_BY_USER,
+          variables: { userId }
+        }]
       });
   
       if (data) {

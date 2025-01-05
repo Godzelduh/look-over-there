@@ -47,7 +47,7 @@
   overflow: hidden;
   width:75%;
   margin-left: 12.5%;
-  height: 65vh;
+  height: 50vh;
 }
 
 .image-reel__viewport {
@@ -59,17 +59,15 @@
 
 .image-reel__slide {
   min-width: 100%; /* Each slide takes full width */
-  height: auto; /* Ensure slide takes full height */
+  height: 50%; /* Ensure slide takes full height */
   display: flex; /* Center the image */
   justify-content: center; /* Center the image horizontally */
   align-items: center; /* Center the image vertically */
-  aspect-ratio: 25 / 12;
 }
 
 .image-style {
-  height: auto; /* Full height of the slide */
+  height: 50%; /* Full height of the slide */
   width: 100%; /* Full width of the slide */
-  max-height: 100%;
   border-radius: 50px; /* Rounded corners */
   object-fit: cover;
 
