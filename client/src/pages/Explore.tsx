@@ -1,5 +1,4 @@
 import React, { useState, useEffect, CSSProperties } from "react";
-import clouds from '../assets/clouds.png';
 import { useLazyQuery } from '@apollo/client';
 import { GET_NEARBY_PLACES } from '../utils/queries';
 import { useUserLocation } from "../utils/userLocation.ts";

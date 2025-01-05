@@ -13,6 +13,8 @@ export const CREATE_USER = gql`
   }
 `;
 
+
+
 export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
@@ -90,14 +92,3 @@ export const ADD_CHALLENGES_TO_HUNT = gql`
     }
   }
 `
-
-export const UPDATE_HUNT_PROGRESS = gql`
-  mutation updateHuntProgress($huntId: ID!, $challengeId: ID!, $status: String!) {
-    updateHuntProgress(huntId: $huntId, challengeId: $challengeId, status: $status) {
-      challenge_id
-      name
-      status
-      completion_time
-    }
-  }
-`;

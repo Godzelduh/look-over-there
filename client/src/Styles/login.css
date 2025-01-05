@@ -32,6 +32,7 @@ border-right: none;
 }
 
 button {
+  color: white;
   font-size: 1rem;
   font-weight: 500;
   width: 15%;
@@ -39,7 +40,6 @@ button {
   height: 56px;
   margin-top: 20px;
   background-color: transparent;
-  
   
 }
 button:hover {
@@ -55,27 +55,13 @@ button:hover {
 .submit-button:hover {
   background-color: #adc526;
 }
-
-.navigate-to-signup {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-
-}
-
-.navigate-to-signup span:hover {
-  color: blue;
-  cursor: pointer;
-}
-
 h2 {
   font-size: 4.5rem;
   font-weight: 500;
   margin-bottom: 50px;
   font-family: cursive, 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   color: transparent; /* Make the text color transparent */
-  background: url('../assets/travelsky.jpg') no-repeat center center; /* Use your background image */
+  background: url('../assets/travelnyc1.jpg') no-repeat center center; /* Use your background image */
   -webkit-background-clip: text; /* Clip the background to the text */
   background-clip: text; /* Clip the background to the text */
 }
