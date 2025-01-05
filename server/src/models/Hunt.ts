@@ -17,7 +17,6 @@ interface IHuntChallenge {
 interface IHunt extends Document {
   user_id: Types.ObjectId;
   challenges: IHuntChallenge[];
-  city: string;
 }
 
 const HuntChallengeSchema = new Schema<IHuntChallenge>({
@@ -72,10 +71,6 @@ const HuntSchema = new Schema<IHunt>({
   challenges: {
     type: [HuntChallengeSchema], // Use the HuntChallengeSchema here
     default: [], // Allow an empty array by default
-  },
-  city: {
-    type: String,
-    required: true
   },
 });
 

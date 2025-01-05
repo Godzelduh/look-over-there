@@ -75,7 +75,6 @@ export const ADD_CHALLENGES_TO_HUNT = gql`
     addChallengesToHunt(input: $input) {
       id 
       user_id
-      city
       challenges {
         challenge_id
         name
