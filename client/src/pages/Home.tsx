@@ -1,4 +1,5 @@
 import { CSSProperties } from 'react';
+import clouds from '../assets/clouds.png';
 //import ScavengerHunting from '../assets/ScavengerHunting.avif'; // Import the image
 import type { ChangeEvent, FormEvent } from 'react';
 import { GET_PLACES } from '../utils/queries';
@@ -198,7 +199,11 @@ const Home = () => {
     return <div>Loading...</div>;
   }
   return (
+    
     <div style={styles.container}>
+            <div className="clouds">
+        <img src={clouds} alt="clouds" />
+      </div>
       {/* Other content can go here*/}
       <CarouselImageReel/>
       <form onSubmit={handleFormSubmit}>

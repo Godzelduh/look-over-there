@@ -116,22 +116,3 @@ body {
     justify-content: center;
     width: 100%;
   }
-  .clouds {
-    position: absolute;
-    width: 100%;
-    height: 100px; /* Adjust the height as needed */
-    background: url('../assets/clouds.png') repeat-x; /* Use your cloud image */
-    animation: moveClouds 60s linear infinite;
-    z-index: 1; 
-    pointer-events: none; /* Prevent the clouds from blocking user interaction */
-  }
-  
-  
-  @keyframes moveClouds {
-    0% {
-      transform: translateX(0);
-    }
-      100% {
-        transform: translateX(-100%);
-      }
-    }

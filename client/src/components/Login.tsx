@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import clouds from '../assets/clouds.png';
 import { Link } from 'react-router-dom';
 import type { ChangeEvent, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -63,6 +64,9 @@ const Login = () => {
   return (
     
     <>
+          <div className="clouds">
+        <img src={clouds} alt="clouds" />
+      </div>
     <Link to="/">
       <img src={LookoverthereLogo1} alt="LookHere!!!" className="nav-logo" />
     </Link>
@@ -70,7 +74,9 @@ const Login = () => {
         <p className="welcome-message">It's time to continue your adventure!</p>
         <img src={LoginGif} alt="Login GIF" className="login-gif" />
       <form onSubmit={handleFormSubmit}>
-
+      <div className="clouds">
+        <img src={clouds} alt="clouds" />
+      </div>
          <div className='form'>
           <label htmlFor='email'>Email</label>
           <input
