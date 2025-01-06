@@ -96,7 +96,7 @@ const Profile: React.FC = () => {
   const hunts = data?.getHuntsByUser || [];
   if (loading) return <p>Loading challenges...</p>;
   //if (error) return <p>Error fetching challenges: {error.message}</p>;
-  if (hunts.length === 0 ) {
+  if (hunts.length  === 0 || error ) {
     return <div><h3 style={styles.h3}>Opps, you have not created any scavenger hunts yet!</h3><h3 style={styles.h3}>Please visit the Home page to create a hunt!</h3></div>
   }
 
@@ -179,7 +179,7 @@ const Profile: React.FC = () => {
                               <button 
                               onClick={() => handleNameReveal(challenge.challenge_id)}
                               className = "hint-button">
-                                Click to reveal!
+                                {showDistance[challenge.challenge_id] ? 'Click to hide!' : 'Click to reveal!'}
                               </button>
                             </div>
                             
@@ -189,7 +189,7 @@ const Profile: React.FC = () => {
                               <button 
                               onClick={() => handleDistanceReveal(challenge.challenge_id)}
                               className = "hint-button">
-                                Click to reveal!
+                                {showDistance[challenge.challenge_id] ? 'Click to hide!' : 'Click to reveal!'}
                               </button>
                             </div>
                           </div>
