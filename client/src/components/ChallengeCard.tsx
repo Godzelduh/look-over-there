@@ -14,14 +14,14 @@ const ChallengeCard = ({ places }: { places: Place[] }) => {
                     {places.map((place: Place, index: number) => (
                         <li id={`challengeCard__slide${index+1}`} tabIndex={0} className="carousel__slide" key={index}>
                             <div className="carousel__snapper">
-                                <div className='image-container'>
+                                <div className='image-container-card'>
                                     <h3 className="overlap">{counter[index]} Challenge!</h3>
                                     {place.photos.map((photo: string, photoIndex: number) => (
                                         <img 
                                             key={photoIndex}
                                             src={photo}
                                             alt={`Image of ${place.name}`}
-                                            className='image-style'
+                                            className='image-style-card'
                                         />
                                     ))}
                                 </div>
