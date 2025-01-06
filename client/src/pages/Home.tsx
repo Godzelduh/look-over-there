@@ -36,7 +36,7 @@ const styles: { container: CSSProperties; image: CSSProperties } = {
 
 const Home = () => {
   const [textQuery, setTextQuery] = useState<string>('');
-  const [searchType, setSearchType] = useState<string>('Tourist Attractions');
+  const searchType = 'Tourist Attractions';
   //use navigate to revert to login page when not logged in
   const navigate = useNavigate();
 
@@ -46,8 +46,6 @@ const Home = () => {
   // new based on Hunt
   // Add useMutation for adding challenges to Hunt
   const [addChallengesToHunt] = useMutation(ADD_CHALLENGES_TO_HUNT)
-
-
 
   /*, {
   refetchQueries: [
@@ -230,18 +228,6 @@ const Home = () => {
               value={textQuery}
               required
             />
-              <select
-                value={searchType}
-                onChange={e => setSearchType(e.target.value)} 
-                className="input"
-              >
-                <option value="Tourist Attractions">Tourist Attractions</option>
-                {/*<option value="Landmarks">Landmarks</option>*/}
-                {/*<option value="Nature">Nature</option>*/}
-                {/*<option value="Resturants">Resturants</option>*/}
-                {/*<option value="Bars">Bars</option>*/}
-              </select>
-   
           </div>
         </div>
         <button
