@@ -37,7 +37,7 @@ li {
     font-weight: bold;
 }
 
-.image-container {
+.image-container-card {
     position: relative;
     display: block;
 }
@@ -55,7 +55,7 @@ li {
     border-top-right-radius: 50px;
 }
 
-.image-style {
+.image-style-card {
     height: 100%;
     width: 100%;
     border-radius: 50px;
@@ -235,7 +235,7 @@ li {
   }
 
   @media screen and (max-width: 970px) {
-    .image-style {
+    .image-style-card {
         height: 60vh;
         width: 100%;
 
@@ -248,7 +248,7 @@ li {
     }
    }
   @media screen and (max-width: 768px) {
-    .image-style {
+    .image-style-card {
         height: 60vh;
         width: 100%;
     }
@@ -260,7 +260,7 @@ li {
     }
    }
    @media screen and (max-width: 450px) {
-    .image-style {
+    .image-style-card {
         width: 75%;
     }
     .carousel, .image-reel {
