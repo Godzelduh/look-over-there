@@ -10,7 +10,11 @@ import '../Styles/profile.css';
 const styles: { h3: CSSProperties } = {
   h3: {
     textAlign: 'left',
-    fontSize: '45px'
+    fontSize: '45px',
+    color: "black",
+    fontWeight: 'bold',
+
+
   }}
 
 const Profile: React.FC = () => {
@@ -18,6 +22,8 @@ const Profile: React.FC = () => {
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [fetchHuntsByUser, { loading, error, data }] = useLazyQuery(GET_HUNTS_BY_USER);
   const [updateHuntProgress] = useMutation(UPDATE_HUNT_PROGRESS);
+  const [showName, setShowName] = useState<{ [key: string]: boolean }>({});
+  const [showDistance, setShowDistance] = useState<{ [key: string]: boolean }>({});
 
 
   useEffect(() => {
@@ -51,13 +57,24 @@ const Profile: React.FC = () => {
     fetchData();
   }, [fetchHuntsByUser]);
 
-  const handleFlip = (challengeId: string) => {
+  const handleCardFlip = (challengeId: string) => {
     setFlippedCard(prev => ({
       ...prev,
       [challengeId]: !prev[challengeId]
     }));
   };
-
+  const handleNameReveal = (challengeId: string) => {
+    setShowName(prev => ({
+      ...prev,
+      [challengeId]: !prev[challengeId]
+    }));
+  };
+  const handleDistanceReveal= (challengeId: string) => {
+    setShowDistance(prev => ({
+      ...prev,
+      [challengeId]: !prev[challengeId]
+    }));
+  };
   const handleCompleteChallenge = async (huntId: string, challengeId: string) => {
     try {
       const userId = Auth.getProfile()?.data?._id;
@@ -75,11 +92,15 @@ const Profile: React.FC = () => {
       alert('Error marking challenge as completed. Please try again.');
     }
   };
-
-  if (loading) return <p>Loading challenges...</p>;
-  if (error) return <p>Error fetching challenges: {error.message}</p>;
-
+ 
   const hunts = data?.getHuntsByUser || [];
+  if (loading) return <p>Loading challenges...</p>;
+  //if (error) return <p>Error fetching challenges: {error.message}</p>;
+  if (hunts.length === 0 ) {
+    return <div><h3 style={styles.h3}>Opps, you have not created any scavenger hunts yet!</h3><h3 style={styles.h3}>Please visit the Home page to create a hunt!</h3></div>
+  }
+
+
 
   return (
     <div className="profile-container">
@@ -101,7 +122,7 @@ const Profile: React.FC = () => {
                       challenge.location.coordinates[1],
                       challenge.location.coordinates[0]
                     )
-                  : null;
+                  : 0;
 
                 const isNear = distance !== null && distance <= 5000;
                 const isCompleted = challenge.status === 'completed';
@@ -123,7 +144,7 @@ const Profile: React.FC = () => {
                               <div className="checkmark">✓</div>
                             )}
                             <button
-                              onClick={() => handleFlip(challenge.challenge_id)}
+                              onClick={() => handleCardFlip(challenge.challenge_id)}
                               className="flip-button"
                             >
                               <FaSyncAlt />
@@ -143,7 +164,7 @@ const Profile: React.FC = () => {
                         {/* Back of card */}
                         <div className="card-back">
                           <button
-                            onClick={() => handleFlip(challenge.challenge_id)}
+                            onClick={() => handleCardFlip(challenge.challenge_id)}
                             className="flip-button"
                           >
                             <FaSyncAlt />
@@ -154,16 +175,20 @@ const Profile: React.FC = () => {
                             
                             <div className="hint-group">
                               <h4 className="hint-label">Name of Attraction:</h4>
-                              <span>{challenge.name}</span>
-                              <button className="hint-button">
+                              <span style={{ display: showName[challenge.challenge_id] ? 'inline' : 'none' }}>{challenge.name}</span>
+                              <button 
+                              onClick={() => handleNameReveal(challenge.challenge_id)}
+                              className = "hint-button">
                                 Click to reveal!
                               </button>
                             </div>
                             
                             <div className="hint-group">
                               <h4 className="hint-label">Distance from Location:</h4>
-                              <span>{distance} meters</span>
-                              <button className="hint-button">
+                              <span style={{ display: showDistance[challenge.challenge_id] ? 'inline' : 'none' }}>{Math.round(distance)} meters</span>
+                              <button 
+                              onClick={() => handleDistanceReveal(challenge.challenge_id)}
+                              className = "hint-button">
                                 Click to reveal!
                               </button>
                             </div>
