@@ -1,4 +1,5 @@
 import React, { useState, useEffect, CSSProperties } from "react";
+import clouds from '../assets/clouds.png';
 import { useLazyQuery } from '@apollo/client';
 import { GET_NEARBY_PLACES } from '../utils/queries';
 import { useUserLocation } from "../utils/userLocation.ts";
@@ -75,7 +76,13 @@ const Explore: React.FC = () => {
 
     return (
         <div style={styles.container}>
-            <h1>Explore Nearby Places</h1>
+                  <div className="clouds">
+        <img src={clouds} alt="clouds" style={styles.image} />
+      </div>
+      <div className="clouds">
+        <img src={clouds} alt="clouds" style={styles.image} />
+      </div>
+            <h2>Explore Nearby Places</h2>
             <div className='search-bar'>
                 <label htmlFor='searchbar' className='search-label'></label>
                 <div className={'city-container'}>
