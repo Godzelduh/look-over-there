@@ -7,15 +7,27 @@ import { haversineDistance } from '../utils/locver';
 import Auth from '../utils/auth';
 import '../Styles/profile.css';
 
-const styles: { h3: CSSProperties } = {
+const styles: { h3: CSSProperties, congratsMsg: CSSProperties } = {
   h3: {
     textAlign: 'left',
     fontSize: '45px',
     color: "black",
     fontWeight: 'bold',
 
-
-  }}
+  },
+   congratsMsg: {
+    marginTop: '10px',
+    padding: '10px',
+    fontSize: '16px',
+    fontWeight: 'bold',
+    color: '#28a745', 
+    backgroundColor: '#d4edda', 
+    border: '1px solid #c3e6cb',
+    borderRadius: '5px',
+    textAlign: 'center',
+  
+  }
+}
 
 const Profile: React.FC = () => {
   const [flippedCard, setFlippedCard] = useState<{ [key: string]: boolean }>({});
@@ -24,7 +36,9 @@ const Profile: React.FC = () => {
   const [updateHuntProgress] = useMutation(UPDATE_HUNT_PROGRESS);
   const [showName, setShowName] = useState<{ [key: string]: boolean }>({});
   const [showDistance, setShowDistance] = useState<{ [key: string]: boolean }>({});
+  const [congratulatoryMessage, setCongratulatoryMessage] = useState<string | null>(null);
 
+  console.log(congratulatoryMessage);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -94,9 +108,24 @@ const Profile: React.FC = () => {
   };
  
   const hunts = data?.getHuntsByUser || [];
+  //for the congratulatory message
+  useEffect(() => {
+    if(data){
+      data.getHuntsByUser.forEach((hunt : any)=>{
+
+        const allChallengesCompleted = hunt.challenges.every((challenge: any) => challenge.status === 'completed');
+        if (allChallengesCompleted) {
+          // alert(`Congratulations! You have completed the scavenger hunt in ${hunt.city}!`);
+          // success(`🎉 You have completed the scavenger hunt in ${hunt.city}!`);
+          setCongratulatoryMessage(`🎉 Congratulations! You have completed the scavenger hunt in ${hunt.city}! 🎉`);
+         
+        }
+      })
+    }
+  }, [data]);
   if (loading) return <p>Loading challenges...</p>;
   //if (error) return <p>Error fetching challenges: {error.message}</p>;
-  if (hunts.length === 0 ) {
+  if (hunts.length  === 0 || error ) {
     return <div><h3 style={styles.h3}>Opps, you have not created any scavenger hunts yet!</h3><h3 style={styles.h3}>Please visit the Home page to create a hunt!</h3></div>
   }
 
@@ -111,7 +140,11 @@ const Profile: React.FC = () => {
       {hunts.map((hunt: any) => (
         <div key={hunt.id} className="hunt-section">
           <h3 className="hunt-title" style={styles.h3}>Hunt for {hunt.city}:</h3>
-
+          {hunt.challenges.every((challenge: any) => challenge.status === 'completed') && (
+            <p style={styles.congratsMsg}>
+             🎉 Congratulations! You have completed the scavenger hunt in {hunt.city}! 🎉
+            </p>
+           )}
           <div className="scroll-container">
             <div className="card-scroll">
               {hunt.challenges.map((challenge: any) => {
@@ -124,7 +157,7 @@ const Profile: React.FC = () => {
                     )
                   : 0;
 
-                const isNear = distance !== null && distance <= 5000;
+                const isNear = distance !== null && distance <= 7000;
                 const isCompleted = challenge.status === 'completed';
                 const isFlipped = flippedCard[challenge.challenge_id];
 
@@ -179,7 +212,7 @@ const Profile: React.FC = () => {
                               <button 
                               onClick={() => handleNameReveal(challenge.challenge_id)}
                               className = "hint-button">
-                                Click to reveal!
+                                {showDistance[challenge.challenge_id] ? 'Click to hide!' : 'Click to reveal!'}
                               </button>
                             </div>
                             
@@ -189,7 +222,7 @@ const Profile: React.FC = () => {
                               <button 
                               onClick={() => handleDistanceReveal(challenge.challenge_id)}
                               className = "hint-button">
-                                Click to reveal!
+                                {showDistance[challenge.challenge_id] ? 'Click to hide!' : 'Click to reveal!'}
                               </button>
                             </div>
                           </div>
