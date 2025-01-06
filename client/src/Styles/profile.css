@@ -51,9 +51,9 @@ h3 {
   overflow-x: auto;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-  /* Ensure container doesn't expand beyond viewport */
-  max-width: calc(100vw - 40px); /* Account for padding */
+  max-width: calc(100vw - 40px);
   margin: 0 auto;
+  position: relative;
 }
 
 .challenge-card {
@@ -73,6 +73,7 @@ h3 {
 }
 
 .verify-button {
+  margin-top: -20px;
   width: 100%;
   padding: 10px;
   border: none;
@@ -123,6 +124,99 @@ h3 {
     z-index: 1;
 }
 
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  transition: transform 0.8s;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  background-color: #f8f9fa;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.flip-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 5px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.hint-section {
+  margin-bottom: 15px;
+}
+
+.hint-section h4 {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.hint-button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.hint-button:hover {
+  background-color: #0056b3;
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+}
+
+.challenge-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.challenge-card.flipped {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  background-color: #f8f9fa;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
 /* Responsive adjustments */
 @media screen and (max-width: 768px) {
   .card-container {
