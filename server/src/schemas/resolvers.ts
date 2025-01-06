@@ -99,15 +99,16 @@ const resolvers = {
     },
     //fetch all hunts  by a user --> new in final folder jan 2 
     getHuntsByUser: async (_: any, { userId }: { userId: string }) => {
-      const hunt = await Hunt.findOne({ user_id: userId })//.populate("challenges.challenge_id");
-      if (!hunt) {
-        throw new Error("No hunt found for the user.");
+      const hunts = await Hunt.find({ user_id: userId })//.populate("challenges.challenge_id");
+      if (!hunts || hunts.length === 0) {
+        throw new Error("No hunts found for the user.");
       }
 
       // Validate challenges
-      hunt.challenges = hunt.challenges.filter((challenge: any) => challenge.challenge_id);
-
-      return hunt;
+      hunts.forEach(hunt => {
+        hunt.challenges = hunt.challenges.filter((challenge: any) => challenge.challenge_id); 
+      })
+      return hunts;
     },
     //fetch all challenges
     getChallenges: async () => {
@@ -227,11 +228,10 @@ const resolvers = {
   },
 
 
-
   Mutation: {
     // Create a new hunt new in final folder jan 2
     addChallengesToHunt: async (_: any, { input }: any) => {
-      const { user_id, challenges } = input;
+      const { user_id, challenges, city } = input;
 
       // Validate user_id
       if (!mongoose.Types.ObjectId.isValid(user_id)) {
@@ -254,7 +254,8 @@ const resolvers = {
       //   console.log("No hunt found for the user. Creating a new one.");
       const hunt = await Hunt.create({
         user_id,
-        challenges: validatedChallenges
+        challenges: validatedChallenges,
+        city
       });
       //} else {
       // console.log("Existing hunt found. Adding new challenges if not duplicates.");
@@ -283,7 +284,7 @@ const resolvers = {
   //mark hunt as completed new in final folder jan 2    
   updateHuntProgress: async (_: any, { huntId, challengeId, status }: any) => {
     // Find the hunt for the user
-    const hunt = await Hunt.findOne({ hunt_id: huntId });
+    const hunt = await Hunt.findOne({ _id: huntId });
 
     if (!hunt) {
       throw new Error("Hunt not found for the user.");
@@ -293,7 +294,7 @@ const resolvers = {
     const challenge = hunt.challenges.find((c) => c.challenge_id.toString() === challengeId);
 
     if (!challenge) {
-      throw new Error("Challenge not found in user's hunt.");
+      throw new Error("Challenge not found for hunt.");
     }
 
     // Update the status and set completion time if the status is 'completed'

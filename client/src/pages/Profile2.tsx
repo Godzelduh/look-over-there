@@ -23,7 +23,7 @@ const Profile: React.FC = () => {
       width: '300px',
       height: '350px',
       margin: '15px',
- 
+      perspective: '1000px',
     },
     cardFlip: {
       position: 'relative',
@@ -33,7 +33,7 @@ const Profile: React.FC = () => {
       transition: 'transform 0.8s',
     },
     cardFace: {
-      
+      position: 'absolute',
       width: '100%',
       height: '100%',
       backfaceVisibility: 'hidden',
@@ -41,10 +41,9 @@ const Profile: React.FC = () => {
       boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
     },
     cardFront: {
-      backgroundColor: 'grey',
+      backgroundColor: 'white',
     },
     cardBack: {
-      
       backgroundColor: '#f8f9fa',
       transform: 'rotateY(180deg)',
       padding: '20px',

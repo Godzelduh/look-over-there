@@ -33,6 +33,13 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  color: white;
+  font-family: cursive;
+}
+h3 {
+  color: whitesmoke;
+  font-family: fantasy;
+  text-align: center;
 }
 
 button {
