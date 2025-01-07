@@ -71,7 +71,8 @@ const Signup = () => {
 
   return (
       <>
-          <Link to="/">
+
+          <Link to="/" className={"nav-logo-container"}>
               <img src={LookoverthereLogo1} alt="LookHere!!!" className="nav-logo"/>
           </Link>
           {/* This is needed for the validation functionality above */}

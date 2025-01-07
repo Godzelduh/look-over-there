@@ -11,6 +11,7 @@ import Castle from '../assets/castle.png';
 import Eiffeltower from '../assets/eiffeltower.png';
 import Fountains from '../assets/fountains.png';
 import Sphinx from '../assets/sphinx.png';
+import viewfinder from '../assets/viewfinder.png';
 
 
 const images = [
@@ -40,6 +41,7 @@ const ImageReel = () => {
                     </div>
                 ))}
             </div>
+            <img src={viewfinder} alt="viewfinderframe" className="viewfinder-frame" />
         </div>
     );
 }

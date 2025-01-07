@@ -96,7 +96,10 @@ const Explore: React.FC = () => {
                 <button className= "log-in" style={{color: "black", fontSize: "20px"}} onClick={handleSearchClick}> Search </button>
                 {loading && <div>Loading...</div>}
                 {error && <div>Error: {error.message}</div>}
-                <ul>
+                </div>
+            </div>
+                <div>
+                    <ul>
                     {nearbyPlaces.map((place: Place) => (
                         <li key={place.name}>
                             <h2>{place.name}</h2>
@@ -106,7 +109,7 @@ const Explore: React.FC = () => {
                     ))}
                 </ul>
                 </div>
-            </div>
+
         </div>
             );
             };
