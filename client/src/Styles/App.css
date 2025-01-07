@@ -7,7 +7,7 @@ body {
 }
 
 #root {
-  max-width: 1280px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -131,7 +131,22 @@ button:hover {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .search-label {
-  color: #7dafb3; /* Change this to your desired color */
+  color: #7dafb3; 
+  font-size: 35px;
+  font-family: cursive, 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.hunt-description {
+  color: #7dafb3; 
+  background-color: #0a3c44;
+  width: 65vw;
+  padding: 30px;
+  padding-top: 40px;
+  border-radius: 50%;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 15px;
+  font-family: cursive, 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  
 }
 .hover-box {
   transition: box-shadow 0.3s ease;
@@ -268,6 +283,10 @@ body {
     width: 90%;
     margin: 0 auto;
   }
+  .hunt-description {
+    width: 85vw;
+    
+  }
 }
 
 @media (max-width: 768px) {
@@ -291,11 +310,16 @@ body {
   .signup-image {
     width: 40vw;
   }
+  .hunt-description {
+
+    padding-top: 45px;
+    
+  }
 }
 
 @media (max-width: 576px) {
   .nav-logo {
-    height: 50px;
+    height: 50px !important;
   }
 
   .nav-link {
@@ -311,9 +335,19 @@ body {
   .signup-image {
     width: 50vw;
   }
+  .hunt-description {
+    width: 90vw;
+    padding-top: 40px;
+    
+  }
 }
 
 @media (max-width: 450px) {
+  #root {
+    margin: 0;
+    padding: 0;;
+
+  }
   .logo {
     height: 3em;
   }
@@ -328,6 +362,11 @@ body {
 
   .signup-image {
     width: 60vw;
+  }
+  .hunt-description {
+    width: 95vw;
+    font-size: 20px;
+    
   }
 }
 

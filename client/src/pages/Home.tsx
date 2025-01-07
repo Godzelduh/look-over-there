@@ -32,7 +32,8 @@ const styles: { container: CSSProperties; image: CSSProperties; welcome: CSSProp
     height: 'auto',
   },
   welcome: {
-    marginTop: 0,
+    marginTop: "0",
+    marginBottom: "5px",
   },
   welcomeBox: {
     textAlign: 'center',
@@ -230,6 +231,7 @@ const Home = () => {
         {/*</div>*/}
         {/*<div>*/}
           <h2 style={styles.welcome}>Look Over There</h2>
+          <div className='hunt-description'>Are you looking to explore a new city? Create your very own scavenger hunt so that you can find all of the main attractions for your city!</div>
         </div>
         {/*<div>*/}
 
@@ -239,7 +241,7 @@ const Home = () => {
   <form onSubmit={handleFormSubmit}>
 
         <div className='search-bar'>
-          <label htmlFor='searchbar' className='search-label'>Your Scavenger Hunt starts here! </label>
+          <label htmlFor='searchbar' className='search-label'>Your Hunt starts here! </label>
           <div className='city-container'>
             <input
               type='text'
