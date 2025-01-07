@@ -8,7 +8,7 @@ import travelingmap from '../assets/travelingmap.jpg';
       textAlign: 'center',
       marginTop: '20px',
       fontSize: '24px',
-      color: '#333',
+      color: 'darkblue',
     },
     boxContainer: {
       display: 'flex',
@@ -21,7 +21,7 @@ import travelingmap from '../assets/travelingmap.jpg';
       border: '1px solid #ccc',
       borderRadius: '8px',
       transition: 'box-shadow 0.3s ease',
-      backgroundColor: 'blue',
+      backgroundColor: 'darkblue',
     },
     boxTitle: {
       fontSize: '25px',

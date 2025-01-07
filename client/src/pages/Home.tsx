@@ -18,7 +18,7 @@ import Auth from '../utils/auth';
 import { ADD_CHALLENGES_TO_HUNT } from '../utils/mutations';
 
 
-const styles: { container: CSSProperties; image: CSSProperties } = {
+const styles: { container: CSSProperties; image: CSSProperties; welcome: CSSProperties; welcomeBox: CSSProperties; welcomeIntro: CSSProperties }= {
   container: {
     textAlign: 'center',
     marginTop: '20px',
@@ -27,13 +27,21 @@ const styles: { container: CSSProperties; image: CSSProperties } = {
   },
   image: {
     display: 'block',
-
     maxWidth: '50%', // Ensure the image is responsive
     padding: '80px',
     height: 'auto',
   },
-};
+  welcome: {
+    marginTop: 0,
+  },
+  welcomeBox: {
+    textAlign: 'center',
+  },
 
+  welcomeIntro: {
+    display: 'flex'
+}
+};
 const Home = () => {
   const [textQuery, setTextQuery] = useState<string>('');
   const searchType = 'Tourist Attractions';
@@ -76,12 +84,12 @@ const Home = () => {
   //     alert('You need to be logged in to save a challenge!');
   //     return;
   //   }
-  
+
   //   if (!places || places.length === 0) {
   //     console.error('No places available to create challenges.');
   //     return;
   //   }
-  
+
   //   try {
   //     for (const place of places) {
   //       // Validate the place object to ensure required fields exist
@@ -89,7 +97,7 @@ const Home = () => {
   //         console.error('Invalid place object:', place);
   //         continue; // Skip invalid places
   //       }
-  
+
   //       const location = {
   //         type: "Point", // Required by schema
   //         coordinates: [
@@ -98,11 +106,11 @@ const Home = () => {
   //         ],
   //         name: place.name || "Unnamed Location", // Fallback name if missing
   //       };
-  
+
   //       const image_url = place.photos?.[0] || 'default-placeholder.jpg'; // Fallback image
   //       const type = "Tourist Attraction"; // Static type
   //       const name = place.name || "Unnamed Challenge"; // Fallback name
-  //       const task = `Visit ${place.name}`; 
+  //       const task = `Visit ${place.name}`;
   //       const address = place.formatted_address || "Address not available"; // Fallback address
   //       // Log the challenge input for debugging
   //       console.log('Creating Challenge:', {
@@ -113,13 +121,13 @@ const Home = () => {
   //         address,
   //         task
   //       });
-  
+
   //       try {
   //         // Execute the mutation
   //         const { data } = await createChallengeMutation({
   //           variables: { input: { type, location, image_url, name, address, task } },
   //         });
-  
+
   //         // Handle successful challenge creation
   //         if (data) {
   //           console.log('Challenge created successfully:', data);
@@ -131,7 +139,7 @@ const Home = () => {
   //         console.error('Error saving challenge for place:', place, mutationError);
   //       }
   //     }
-  
+
   //     alert('All challenges processed!');
   //   } catch (err) {
   //     // Handle unexpected errors
@@ -142,18 +150,18 @@ const Home = () => {
 
   // new based on Hunt
   const handleCreateChallenge = async () => {
-    
+
     if (!Auth.loggedIn()) {
       alert('You need to be logged in to save a challenge!');
       navigate('/login')
       return;
     }
-  
+
     if (!places || places.length === 0) {
       console.error('No places available to create challenges.');
       return;
     }
-  
+
     try {
       const userId = Auth.getProfile().data._id;
       const city = textQuery;
@@ -162,7 +170,7 @@ const Home = () => {
           console.error('Invalid place object:', place);
           return null; // Skip invalid places
         }
-  
+
         return {
           name: place.name || "Unnamed Challenge",
           location: {
@@ -179,7 +187,7 @@ const Home = () => {
           completion_time: null,
         };
       }).filter((challenge: any) => challenge !== null);
-  
+
       const { data } = await addChallengesToHunt({
         variables: { input: { user_id: userId, challenges, city } },
         refetchQueries: [{
@@ -187,7 +195,7 @@ const Home = () => {
           variables: { userId }
         }]
       });
-  
+
       if (data) {
         console.log('Challenges successfully added to Hunt:', data);
         alert('Challenges added to your Hunt!');
@@ -197,7 +205,7 @@ const Home = () => {
     } catch (err) {
       console.error('Unexpected error while adding challenges to Hunt:', err);
       alert('Failed to save challenges to Hunt.');
-      
+
     }
   };
 
@@ -205,20 +213,34 @@ const Home = () => {
     return <div>Loading...</div>;
   }
   return (
-    
+
     <div style={styles.container}>
             <div className="clouds">
         <img src={clouds} alt="clouds" />
       </div>
-      {/* Other content can go here*/}
+
       <div>
       <CarouselImageReel/>
     </div>
-      <form onSubmit={handleFormSubmit}>
-        
+      <div style={styles.welcomeBox}>
+        {/*<div>*/}
+        {/*  <p>Looking for a fun an exciting way to find places to go while*/}
+        {/*    visiting a new city?*/}
+        {/*  </p>*/}
+        {/*</div>*/}
+        {/*<div>*/}
+          <h2 style={styles.welcome}>Look Over There</h2>
+        </div>
+        {/*<div>*/}
+
+        {/*</div>*/}
+        {/*<p>Or maybe  a new way to experience where you live?</p>*/}
+        {/*</div>*/}
+  <form onSubmit={handleFormSubmit}>
+
         <div className='search-bar'>
           <label htmlFor='searchbar' className='search-label'>Your Scavenger Hunt starts here! </label>
-          <div className='city-container'> 
+          <div className='city-container'>
             <input
               type='text'
               placeholder=' Enter your city'
