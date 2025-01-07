@@ -3,6 +3,10 @@ https://github.com/Godzelduh/look-over-there
 https://look-over-there.onrender.com/ 
 
 ## Description 
+
+![Screenshot 2025-01-07 175557](https://github.com/user-attachments/assets/e5f57e68-494c-4b05-ae13-d44d39d80381)
+
+
 The 'look over there' application takes out user on a simple and exicitng journey on locating fun spots to find in a scavenger hunt style. 
 The application will prompt the user to choose a city where they would like to visit so that they can find five different specific locations that are provided to them. Once they are in the vicinity, they will then have the ability to check off each location they have found. Additionally, the user, at any point, will be able to search nearby relative to their current location using the device they launched the app on. This will then give them a handful of locations that are with a close proximity, so that they then can explore more of what is in their area regardless if it's visiting or living in. 
 
