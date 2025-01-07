@@ -159,7 +159,7 @@ const Profile: React.FC = () => {
                     )
                   : 0;
 
-                const isNear = distance !== null && distance <= 7000;
+                const isNear = distance !== null && distance <= 500;
                 const isCompleted = challenge.status === 'completed';
                 const isFlipped = flippedCard[challenge.challenge_id];
 
