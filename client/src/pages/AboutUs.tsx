@@ -1,46 +1,17 @@
 import React from 'react';
+import '../Styles/AboutUs.css';
 import { CSSProperties } from 'react';
 import travelingmap from '../assets/travelingmap.jpg';
 //import TravelTopFiveChoices from '../assets/traveltopfivechoices.png';
 
   const styles: { [key: string]: CSSProperties } = {
-    container: {
-      textAlign: 'center',
-      marginTop: '20px',
-      fontSize: '24px',
-      color: 'darkblue',
-    },
-    boxContainer: {
-      display: 'flex',
-      justifyContent: 'space-around',
-      marginTop: '40px',
-    },
-    box: {
-      width: '30%',
-      padding: '20px',
-      border: '1px solid #ccc',
-      borderRadius: '8px',
-      transition: 'box-shadow 0.3s ease',
-      backgroundColor: 'darkblue',
-    },
-    boxTitle: {
-      fontSize: '25px',
-      fontWeight: 'bold',
-      marginBottom: '10px',
-      color: '#007bff',
-    },
-    boxContent: {
-      fontSize: '16px',
-      lineHeight: '1.5',
-      color: '#fff',
-    },
+
+
     highlight: {
       fontWeight: 'bold',
       color: '#007bff',
     },
-    imageContainer: {
-      marginTop: '40px',
-    },
+
     image: {
       maxWidth: '100%',
       height: 'auto',
@@ -64,28 +35,28 @@ import travelingmap from '../assets/travelingmap.jpg';
   };
   
   const AboutUs: React.FC = () => (
-    <div style={styles.container}>
-      <div style={styles.boxContainer}>
-        <div style={styles.box} className="hover-box">
-          <div style={styles.boxTitle}>Our Mission</div>
-          <div style={styles.boxContent}>
+    <div className="container">
+      <div className="boxContainer">
+        <div className="box hover-box">
+          <div className="boxTitle">Our Mission</div>
+          <div className="boxContent">
             We want to implement a way for our users to enjoy the vast number of attractions regardless of their location. Whereever they are, there will always be something to find!
           </div>
         </div>
-        <div style={styles.box} className="hover-box">
-          <div style={styles.boxTitle}>Our Values</div>
-          <div style={styles.boxContent}>
+        <div className="box hover-box">
+          <div className="boxTitle">Our Values</div>
+          <div className="boxContent">
             We value user-friendly experience, that ensures they not only get to their locations safely, but also in a helpful challenge that will keep them coming back for future hunts.
           </div>
         </div>
-        <div style={styles.box} className="hover-box">
-          <div style={styles.boxTitle}>Our Future</div>
-          <div style={styles.boxContent}>
+        <div className="box hover-box">
+          <div className="boxTitle">Our Future</div>
+          <div className="boxContent">
             We want to continue to progress regardless of the point in time, from having augmented reality, to have nearly every crevice of the world become available for our users!
           </div>
         </div>
       </div>
-      <div style={styles.imageContainer}>
+      <div className="imageContainer">
         <img src={travelingmap} alt="Travel" style={styles.image} />
       </div>
     

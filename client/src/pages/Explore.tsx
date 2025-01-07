@@ -83,6 +83,7 @@ const Explore: React.FC = () => {
         <img src={clouds} alt="clouds" style={styles.image} />
       </div>
             <h2>Explore Nearby Places</h2>
+            <div className='hunt-description'>Not up for a full scavenger hunt? Continue exploring your location by searching for places nearby!</div>
             <div className='search-bar'>
                 <label htmlFor='searchbar' className='search-label'></label>
                 <div className={'city-container'}>
