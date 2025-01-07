@@ -13,6 +13,14 @@ body {
   text-align: center;
   z-index: 3;
 }
+.app-container {
+  display: flex;
+  flex-direction: column;
+
+}
+.cloud-container {
+  z-index: -1;
+}
 
 .logo {
   height: 6em;
@@ -243,7 +251,7 @@ body {
 
 @media (max-width: 992px) {
   .nav {
-    flex-direction: column;
+
     padding: 10px;
   }
 
@@ -254,7 +262,7 @@ body {
   }
 
   .nav-list {
-    flex-direction: column;
+
     gap: 10px;
   }
 

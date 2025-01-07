@@ -1,6 +1,6 @@
 /* Container styles */
 .profile-container {
-  width: 100%;
+  width: 80vw;
   text-align: center;
   margin-top: 20px;
   position: relative;
@@ -48,7 +48,7 @@
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  height: calc(100%-16px); 
+  height: 100%; 
   align-items: center; 
   padding-bottom: 16px;
 }
@@ -242,18 +242,19 @@
   .scroll-container {
     height: 380px; 
   }
-  .card {
-    width: 240px;
-    height: 360px;
-  }
+
   .image-container {
-    height: 260px;
+    height: 270px;
   }
   
   .checkmark {
     top: 80px;
     right: 80px;
     font-size: 48px;
+  }
+  .profile-container {
+    width: 100vw;
+  
   }
 
 }
@@ -275,6 +276,10 @@
     top: 64px;
     right: 64px;
     font-size: 40px;
+  }
+  .profile-container {
+    width: 120vw;
+  
   }
 }
 

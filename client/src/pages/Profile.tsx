@@ -8,11 +8,12 @@ import Auth from '../utils/auth';
 import '../Styles/profile.css';
 
 const styles: { h3: CSSProperties, congratsMsg: CSSProperties } = {
+
   h3: {
     textAlign: 'left',
     fontSize: '45px',
     color: "black",
-    fontWeight: 'bold',
+    fontWeight: 'bold'
 
   },
    congratsMsg: {
@@ -108,6 +109,7 @@ const Profile: React.FC = () => {
   };
  
   const hunts = data?.getHuntsByUser || [];
+  const sortedHunts = [...hunts].reverse();
   //for the congratulatory message
   useEffect(() => {
     if(data){
@@ -137,17 +139,17 @@ const Profile: React.FC = () => {
       
       <h2>Your Active Hunts</h2>
 
-      {hunts.map((hunt: any) => (
-        <div key={hunt.id} className="hunt-section">
-          <h3 className="hunt-title" style={styles.h3}>Hunt for {hunt.city}:</h3>
-          {hunt.challenges.every((challenge: any) => challenge.status === 'completed') && (
+      {sortedHunts.map((sortedHunt: any) => (
+        <div key={sortedHunt.id} className="hunt-section">
+          <h3 className="hunt-title" style={styles.h3}>Hunt for {sortedHunt.city}:</h3>
+          {sortedHunt.challenges.every((challenge: any) => challenge.status === 'completed') && (
             <p style={styles.congratsMsg}>
-             🎉 Congratulations! You have completed the scavenger hunt in {hunt.city}! 🎉
+             🎉 Congratulations! You have completed the scavenger hunt in {sortedHunt.city}! 🎉
             </p>
            )}
           <div className="scroll-container">
             <div className="card-scroll">
-              {hunt.challenges.map((challenge: any) => {
+              {sortedHunt.challenges.map((challenge: any) => {
                 const distance = userLocation
                   ? haversineDistance(
                       userLocation.lat,
@@ -184,7 +186,7 @@ const Profile: React.FC = () => {
                             </button>
                           </div>
                           <button
-                            onClick={() => handleCompleteChallenge(hunt.id, challenge.challenge_id)}
+                            onClick={() => handleCompleteChallenge(sortedHunt.id, challenge.challenge_id)}
                             disabled={!isNear || isCompleted}
                             className={`verify-button ${
                               isCompleted ? 'completed' : isNear ? 'near' : 'not-near'
@@ -212,7 +214,7 @@ const Profile: React.FC = () => {
                               <button 
                               onClick={() => handleNameReveal(challenge.challenge_id)}
                               className = "hint-button">
-                                {showDistance[challenge.challenge_id] ? 'Click to hide!' : 'Click to reveal!'}
+                                {showName[challenge.challenge_id] ? 'Click to hide!' : 'Click to reveal!'}
                               </button>
                             </div>
                             
