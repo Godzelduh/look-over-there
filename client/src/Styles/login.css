@@ -133,6 +133,16 @@ h2 {
   }
 }
 
+.nav-logo-container {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.nav-logo {
+  height: 85px; /* Adjust size as needed */
+}
+
 @media screen and (max-width: 768px) {
   h2 {
     font-size: 2.5rem; 

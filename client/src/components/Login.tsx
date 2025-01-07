@@ -67,9 +67,9 @@ const Login = () => {
           <div className="clouds">
         <img src={clouds} alt="clouds" />
       </div>
-    <Link to="/">
-      <img src={LookoverthereLogo1} alt="LookHere!!!" className="nav-logo" />
-    </Link>
+      <Link to="/" className={"nav-logo-container"}>
+        <img src={LookoverthereLogo1} alt="LookHere!!!" className="nav-logo"/>
+      </Link>
     <h2>Welcome Back!</h2>
         <p className="welcome-message">It's time to continue your adventure!</p>
         <img src={LoginGif} alt="Login GIF" className="login-gif" />
