@@ -1,5 +1,6 @@
 # look-over-there
 https://github.com/Godzelduh/look-over-there
+https://look-over-there.onrender.com/ 
 
 ## Description 
 The 'look over there' application takes out user on a simple and exicitng journey on locating fun spots to find in a scavenger hunt style. 
@@ -7,9 +8,10 @@ The application will prompt the user to choose a city where they would like to v
 
 To bring this experience for our users is truly rewarding since we can analyze the data being fed back, and see what are the most popular places that they would like to discover more about, regardless if it's a generated scavenger hunt or nearby locations. This is available to nearly everyone around the world, and the progressive development would like to incorporate augmented reality to make the experience more dynamic and interactive for our users. 
 
-## Installation 
+## Technologies 
 
-Video link:  
+HTML, CSS, Typescript, React, Vite, Node, Express, GraphQL, Apollo Client, Apollo Server, JWT, bcrypt, MongoDB, Mongoose , Render, Google Maps Platform API.
+ 
 
 ## Collaborators 
 
@@ -44,3 +46,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+Collapse
+look-over-there.txt
+3 KB
