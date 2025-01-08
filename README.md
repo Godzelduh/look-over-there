@@ -11,6 +11,7 @@ To bring this experience for our users is truly rewarding since we can analyze t
 ## Technologies 
 
 HTML, CSS, Typescript, React, Vite, Node, Express, GraphQL, Apollo Client, Apollo Server, JWT, bcrypt, MongoDB, Mongoose , Render, Google Maps Platform API.
+
  
 ## Screenshots of Application
 ![Home](client/src/assets/Screenshot1.png)
