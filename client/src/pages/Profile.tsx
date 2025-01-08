@@ -128,7 +128,7 @@ const Profile: React.FC = () => {
   if (loading) return <p>Loading challenges...</p>;
   //if (error) return <p>Error fetching challenges: {error.message}</p>;
   if (hunts.length  === 0 || error ) {
-    return <div><h3 style={styles.h3}>Opps, you have not created any scavenger hunts yet!</h3><h3 style={styles.h3}>Please visit the Home page to create a hunt!</h3></div>
+    return <div><h3 style={styles.h3}>Oops, you have not created any scavenger hunts yet!</h3><h3 style={styles.h3}>Please visit the Home page to create a hunt!</h3></div>
   }
 
 
@@ -159,7 +159,7 @@ const Profile: React.FC = () => {
                     )
                   : 0;
 
-                const isNear = distance !== null && distance <= 50000;
+                const isNear = distance !== null && distance <= 100;
                 const isCompleted = challenge.status === 'completed';
                 const isFlipped = flippedCard[challenge.challenge_id];
 
