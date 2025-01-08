@@ -12,7 +12,12 @@ To bring this experience for our users is truly rewarding since we can analyze t
 
 HTML, CSS, Typescript, React, Vite, Node, Express, GraphQL, Apollo Client, Apollo Server, JWT, bcrypt, MongoDB, Mongoose , Render, Google Maps Platform API.
  
-
+## Screenshots of Application
+![Home](client/src/assets/Screenshot1.png)
+![Home (bottom)](client/src/assets/Screenshot2.png)
+![Profile](client/src/assets/Screenshot3.png)
+![Explore](client/src/assets/Screenshot4.png)
+![Explore(bottom)](client/src/assets/Screenshot5.png)
 ## Collaborators 
 
 Melanie Primpas - https://github.com/melanieprimpas
